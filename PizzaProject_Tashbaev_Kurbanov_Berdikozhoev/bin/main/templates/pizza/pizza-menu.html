@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head th:replace="~{fragments/general :: general('Menu')}"></head>
+
+<body>
+
+<div id="toast"
+     th:if="${message}"
+     th:text="${message}">
+</div>
+
+<header th:replace="~{fragments/header ::
+        header(${currentUser != null} ? 'Hallo, ' + ${currentUser.loginName} + ' :: was kann ich für dich tun?' : 'hallo :: was kann ich für dich tun?')}"
+        class="header">
+</header>
+
+<main class="d-flex flex-column align-items-center">
+    <section class="pizza-list w-50 mt-4">
+        <table class="table table-bordered align-middle">
+            <thead>
+            <tr>
+                <th>Menge</th>
+                <th>Pizza</th>
+                <th>Preis+Größe</th>
+                <th>in den Warenkorb</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pizza : ${pizzas}">
+                <td>
+                    <input class="form-control qty" name="quantity" value="0" type="number" min="0"/>
+                </td>
+                <td th:text="${pizza.name}"></td>
+                <td>
+                    <select class="form-select size" name="size">
+                        <option value="SMALL" th:text="'Small / ' + ${pizza.priceSmall}"></option>
+                        <option value="MEDIUM" th:text="'Medium / ' + ${pizza.priceMedium}" selected></option>
+                        <option value="LARGE" th:text="'Large / ' + ${pizza.priceLarge}"></option>
+                    </select>
+                </td>
+                <td>
+                    <form th:action="@{|/cart/add|}"
+                          method="post" class="addForm">
+                        <input type="hidden" name="pizzaId" th:value="${pizza.id}"/>
+                        <input type="hidden" name="quantity" class="hiddenQty"/>
+                        <input type="hidden" name="size" class="hiddenSize"/>
+                        <button type="submit" class="btn btn-outline-primary">in den Warenkorb</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="pizza-cart w-50 mt-2 d-flex flex-column gap-1">
+        <h2 class="fs-6 fw-normal">
+            IM WARENKORB ::: Anzahl der bestellten Pizzas:
+            <span th:if="${cart != null}" th:text="${cart.items.size()}"></span>
+            <span th:if="${cart == null}" th:text="${sessionCart.size()}"></span>
+        </h2>
+        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser == null ? true : currentUser.role.name() == 'USER'}" th:href="@{/cart}">
+            zum Warenkorb
+        </a>
+        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" th:href="@{'/pizzas'}">
+            zum Pizza-Verwaltung
+        </a>
+        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" th:href="@{'/customers'}">
+            zum Kunden-Verwaltung
+        </a>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/footer}"></footer>
+
+<script>
+    const QTY_KEY = "pizza_qty";
+    const SIZE_KEY = "pizza_size";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const qtyState = JSON.parse(localStorage.getItem(QTY_KEY) || "{}");
+        const sizeState = JSON.parse(localStorage.getItem(SIZE_KEY) || "{}");
+
+        document.querySelectorAll("tr").forEach(row => {
+            const idField = row.querySelector("input[name='pizzaId']");
+            if (!idField) return;
+
+            const id = idField.value;
+            const qty = row.querySelector(".qty");
+            const size = row.querySelector(".size");
+
+            if (qtyState[id] !== undefined) qty.value = qtyState[id];
+            if (sizeState[id] !== undefined) size.value = sizeState[id];
+        });
+
+        const toast = document.getElementById("toast");
+        if (toast && toast.textContent.trim() !== "") {
+            toast.style.background = "#28a745";
+            toast.style.color = "white";
+            toast.style.opacity = "1";
+            setTimeout(() => toast.style.opacity = "0", 5000);
+        }
+    });
+
+    document.addEventListener("input", e => {
+        const row = e.target.closest("tr");
+        if (!row) return;
+        const idField = row.querySelector("input[name='pizzaId']");
+        if (!idField) return;
+        const id = idField.value;
+
+        const qtyState = JSON.parse(localStorage.getItem(QTY_KEY) || "{}");
+        const sizeState = JSON.parse(localStorage.getItem(SIZE_KEY) || "{}");
+
+        if (e.target.classList.contains("qty")) {
+            qtyState[id] = e.target.value;
+            localStorage.setItem(QTY_KEY, JSON.stringify(qtyState));
+        }
+
+        if (e.target.classList.contains("size")) {
+            sizeState[id] = e.target.value;
+            localStorage.setItem(SIZE_KEY, JSON.stringify(sizeState));
+        }
+    });
+
+    function showToast(msg, type = "success") {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+
+        if (type === "warning") {
+            t.style.background = "#f0ad4e";
+            t.style.color = "black";
+        } else {
+            t.style.background = "#28a745";
+            t.style.color = "white";
+        }
+
+        t.style.opacity = "1";
+
+        const duration = type === "success" ? 5000 : 3000;
+        setTimeout(() => t.style.opacity = "0", duration);
+    }
+
+    document.querySelectorAll(".addForm").forEach(form => {
+        form.addEventListener("submit", e => {
+            const row = form.closest("tr");
+            const qty = row.querySelector(".qty");
+            const size = row.querySelector(".size");
+
+            if (qty.value < 1) {
+                e.preventDefault();
+                showToast("Mindestmenge ist 1", "warning");
+                return;
+            }
+
+            form.querySelector(".hiddenQty").value = qty.value;
+            form.querySelector(".hiddenSize").value = size.value;
+
+            showToast("In den Warenkorb hinzugefügt!", "success");
+        });
+    });
+</script>
+</body>
+</html>

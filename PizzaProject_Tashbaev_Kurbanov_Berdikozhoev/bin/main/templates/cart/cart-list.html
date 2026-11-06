@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: general('cart')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header('Warenkorb')}" class="header"></header>
+
+<main class="d-flex flex-column align-items-center gap-2">
+    <div th:if="${error}" class="alert alert-danger text-center w-50 mx-auto">
+        <span th:text="${error}"></span>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success text-center w-50 mx-auto">
+        <span th:text="${success}"></span>
+    </div>
+
+    <section class="cart-list d-flex flex-column gap-2 w-50">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="chooseAllCheckbox" name="all"/>
+                    <label class="ml-3" for="chooseAllCheckbox">alles</label>
+                </th>
+                <th>Pizza</th>
+                <th>
+                    <div class="d-flex gap-80">
+                        <span>Preis + Größe</span>
+                        <span>Anzahl</span>
+                    </div>
+                </th>
+                <th>Artikelspreis</th>
+                <th>&nbsp</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- DATABASE CART -->
+            <th:block th:if="${cart != null}">
+                <tr th:each="item, iterStat : ${cart.items}">
+                    <td>
+                        <input form="orderForm" type="checkbox" name="selectedItems" th:value="${item.id}"
+                               th:attr="data-price=${itemPrices.get(iterStat.index)}" data-type="db"
+                               class="select-item"/>
+                    </td>
+                    <td th:text="${item.pizza.name}"></td>
+                    <td>
+                        <form th:action="@{|/cart/update/${item.id}|}" method="post" class="d-flex gap-2">
+
+                            <select name="size" class="form-select" style="width: 180px">
+                                <option th:selected="${item.size.name() == 'SMALL'}" th:value="SMALL"
+                                        th:text="${item.pizza.priceSmall} + ' € / SMALL'"></option>
+                                <option th:selected="${item.size.name() == 'MEDIUM'}" th:value="MEDIUM"
+                                        th:text="${item.pizza.priceMedium} + ' € / MEDIUM'"></option>
+                                <option th:selected="${item.size.name() == 'LARGE'}" th:value="LARGE"
+                                        th:text="${item.pizza.priceLarge} + ' € / LARGE'"></option>
+                            </select>
+
+                            <input type="number" name="quantity" th:value="${item.quantity}" min="1"
+                                   class="form-control" style="width: 70px"/>
+
+                            <button type="submit" class="btn btn-primary">Aktualisieren</button>
+                        </form>
+                    </td>
+                    <td>
+                        <span th:text="${itemPrices.get(iterStat.index)} + ' €'"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{|/cart/delete/${item.id}|}" method="post">
+                            <button type="submit" class="btn btn-danger">Entfernen</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+
+            <!-- SESSION CART -->
+            <th:block th:if="${sessionCart != null}">
+                <tr th:each="item, iterStat : ${sessionCart}">
+                    <td>
+                        <input form="orderForm" type="checkbox" name="selectedItems" th:value="${iterStat.index}"
+                               th:attr="data-price=${item.getPriceForItem()}" data-type="session" class="select-item"/>
+                    </td>
+                    <td th:text="${item.pizza.name}"></td>
+                    <td>
+                        <form th:action="@{|/cart/update/session/${iterStat.index}|}" method="post"
+                              class="d-flex gap-2">
+
+                            <select name="size" class="form-select" style="width: 180px">
+                                <option th:selected="${item.size.name() == 'SMALL'}" th:value="SMALL"
+                                        th:text="${item.pizza.priceSmall} + ' € / SMALL'"></option>
+                                <option th:selected="${item.size.name() == 'MEDIUM'}" th:value="MEDIUM"
+                                        th:text="${item.pizza.priceMedium} + ' € / MEDIUM'"></option>
+                                <option th:selected="${item.size.name() == 'LARGE'}" th:value="LARGE"
+                                        th:text="${item.pizza.priceLarge} + ' € / LARGE'"></option>
+                            </select>
+
+                            <input type="number" name="quantity" th:value="${item.quantity}" min="1"
+                                   class="form-control" style="width: 70px"/>
+
+                            <button type="submit" class="btn btn-primary">Aktualisieren</button>
+                        </form>
+                    </td>
+                    <td>
+                        <span th:text="${item.getPriceForItem()} + ' €'"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{|/cart/delete/session/${iterStat.index}|}" method="post">
+                            <button type="submit" class="btn btn-danger">Entfernen</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+
+        <p th:if="${cart != null || sessionCart != null}">
+            Gesamtpreis: <span id="totalPrice" th:text="${cartTotalPrice}"></span> €
+        </p>
+
+        <div th:if="${currentUser != null && currentUser.role.name() == 'USER' && currentUser.customer == null}"
+             class="mb-3">
+            <p class="text-danger small mb-1">
+                Bitte fügen Sie ein Profil hinzu.
+            </p>
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
+                Profil hinzufügen
+            </button>
+        </div>
+
+        <a class="btn btn-outline-tertiary" th:href="@{/}">zurück zum Menu</a>
+
+        <form class="d-flex flex-column gap-3" id="orderForm" th:action="@{/ordered}" method="post">
+            <select th:if="${currentUser != null && currentUser.customer != null && currentUser.role.name() == 'USER'}"
+                    name="deliveryAddressId" class="form-select" required>
+                <option value="" disabled selected>Bitte wählen Sie eine Lieferadresse</option>
+
+                <option th:each="addr : ${deliveryAddresses}"
+                        th:value="${addr.id}"
+                        th:text="${addr.street + ' ' + addr.houseNumber + ', ' + addr.town + ', ' + addr.postalCode}">
+                </option>
+            </select>
+
+            <p th:if="${currentUser != null &&
+               currentUser.role.name() == 'USER' &&
+               currentUser.customer != null &&
+               (deliveryAddresses == null or #lists.isEmpty(deliveryAddresses))}"
+               class="text-danger small mb-1">
+                Bitte fügen Sie eine Lieferadresse hinzu.
+            </p>
+
+            <div th:if="${currentUser != null
+                && currentUser.role.name() == 'USER'
+                && currentUser.customer != null
+                && (deliveryAddresses == null or #lists.isEmpty(deliveryAddresses))}">
+                <button type="button"
+                        class="btn btn-outline-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addAddressModal">
+                    + Adresse hinzufügen
+                </button>
+            </div>
+
+            <button
+                    id="orderButton"
+                    type="submit"
+                    class="btn btn-success"
+                    th:disabled="${currentUser == null or currentUser.customer == null}"
+                    th:attr="data-has-profile=${currentUser == null || (currentUser != null && currentUser.customer != null)}">
+                Bestellen
+            </button>
+        </form>
+    </section>
+</main>
+
+<div th:if="${form != null}">
+    <div th:replace="~{fragments/address-form :: address-form(form=${form}, redirectUrl='/cart')}"></div>
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true"
+         th:if="${currentUser != null && currentUser.customer == null}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form th:action="@{/profile/create-full}" th:object="${form}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="profileModalLabel">Profil hinzufügen</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-2">
+                        <h6>Persönliche Daten</h6>
+                        <input type="text" th:field="*{firstName}" placeholder="Vorname" class="form-control">
+                        <input type="text" th:field="*{lastName}" placeholder="Nachname" class="form-control">
+
+                        <h6>Adresse</h6>
+                        <input type="text" th:field="*{street}" placeholder="Straße" class="form-control">
+                        <input type="text" th:field="*{houseNumber}" placeholder="Hausnummer" class="form-control">
+                        <input type="text" th:field="*{town}" placeholder="Stadt" class="form-control">
+                        <input type="text" th:field="*{postalCode}" placeholder="PLZ" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const orderBtn = document.getElementById('orderButton');
+        const chooseAllCheckbox = document.getElementById('chooseAllCheckbox');
+        const orderForm = document.getElementById('orderForm');
+        const totalEl = document.getElementById('totalPrice');
+
+        const STORAGE_KEY = 'cart_selected_items_v1';
+
+        function getCheckboxes() {
+            return Array.from(document.querySelectorAll('.select-item'));
+        }
+
+        function saveSelection() {
+            const selected = getCheckboxes()
+                .filter(cb => cb.checked)
+                .map(cb => `${cb.value}|${cb.dataset.type}`);
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(selected));
+        }
+
+        function restoreSelection() {
+            const raw = sessionStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            let saved;
+            try {
+                saved = JSON.parse(raw);
+            } catch (e) {
+                saved = [];
+            }
+            if (!Array.isArray(saved)) return;
+
+            getCheckboxes().forEach(cb => {
+                const key = `${cb.value}|${cb.dataset.type}`;
+                cb.checked = saved.includes(key);
+            });
+        }
+
+        function recalcPrice() {
+            if (!totalEl) return;
+            let total = 0;
+            getCheckboxes().forEach(cb => {
+                if (!cb.checked) return;
+                const p = cb.dataset.price;
+                const price = p === undefined ? NaN : parseFloat(p.toString().replace(',', '.'));
+                if (!isNaN(price)) total += price;
+            });
+            totalEl.textContent = total.toFixed(2);
+        }
+
+        function toggleOrderButton() {
+            const anyChecked = getCheckboxes().some(cb => cb.checked);
+            const hasProfile = orderBtn.dataset.hasProfile === "true";
+            orderBtn.disabled = !(anyChecked && hasProfile);
+        }
+
+        function updateChooseAll() {
+            const boxes = getCheckboxes();
+            if (boxes.length === 0) {
+                if (chooseAllCheckbox) chooseAllCheckbox.checked = false;
+                return;
+            }
+            const allChecked = boxes.every(cb => cb.checked);
+            if (chooseAllCheckbox) chooseAllCheckbox.checked = allChecked;
+        }
+
+        function attachListeners() {
+            getCheckboxes().forEach(cb => {
+                cb.removeEventListener('change', onItemChange);
+                cb.addEventListener('change', onItemChange);
+            });
+        }
+
+        function onItemChange() {
+            recalcPrice();
+            toggleOrderButton();
+            updateChooseAll();
+            saveSelection();
+        }
+
+        if (chooseAllCheckbox) {
+            chooseAllCheckbox.addEventListener('change', () => {
+                const checked = chooseAllCheckbox.checked;
+                getCheckboxes().forEach(cb => cb.checked = checked);
+                recalcPrice();
+                toggleOrderButton();
+                saveSelection();
+            });
+        }
+
+        if (orderForm) {
+            orderForm.addEventListener('submit', function (e) {
+                document.querySelectorAll('.hidden-type-input').forEach(el => el.remove());
+
+                getCheckboxes().filter(cb => cb.checked).forEach(cb => {
+                    const hidden = document.createElement('input');
+                    hidden.type = 'hidden';
+                    hidden.name = cb.name + "_type";
+                    hidden.value = cb.dataset.type || '';
+                    hidden.classList.add('hidden-type-input');
+                    orderForm.appendChild(hidden);
+                });
+
+                saveSelection();
+            });
+        }
+
+        const addressSelect = document.querySelector('select[name="deliveryAddressId"]');
+        if (addressSelect && addressSelect.options.length > 0) {
+            for (let i = 0; i < addressSelect.options.length; i++) {
+                const opt = addressSelect.options[i];
+                if (!opt.disabled) {
+                    opt.selected = true;
+                    break;
+                }
+            }
+        }
+
+        restoreSelection();
+        attachListeners();
+        recalcPrice();
+        toggleOrderButton();
+        updateChooseAll();
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head th:replace="~{fragments/general :: general('Login')}" xmlns:th="http://www.w3.org/1999/xhtml"></head>
+<body>
+<header></header>
+<main class="d-flex flex-column align-items-center gap-2 mt-4">
+    <h2 class="mb-3">Anmelden</h2>
+    <div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger"></div>
+
+    <section class="login pizza-add w-25 mt-4">
+        <div class="card card-body">
+            <form th:action="@{/login}" method="post" class="mb-3 d-flex flex-column">
+                <input type="hidden" name="redirect"
+                       th:value="${param.redirect}" />
+
+                <div class="mb-3">
+                    <label for="loginName" class="form-label">Loginname</label>
+                    <input type="text" id="loginName" name="loginName" placeholder="loginname" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Passwort</label>
+                    <input type="password" id="password" name="password" placeholder="passwort" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary">einloggen</button>
+            </form>
+            <p class="text-center">
+                Haben sie keinen Konto?
+            </p>
+            <div class="actions d-flex gap-2">
+                <a class="btn btn-outline-primary flex-1" th:href="@{/register}">neu Konto erstellen</a>
+                <a class="btn btn-outline-tertiary flex-1" th:href="@{/}">zum Hauptmenu</a>
+            </div>
+        </div>
+    </section>
+</main>
+</body></html>

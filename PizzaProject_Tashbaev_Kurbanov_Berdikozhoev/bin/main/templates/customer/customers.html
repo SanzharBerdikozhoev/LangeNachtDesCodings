@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kunde</title>
+    <link rel="stylesheet" th:href="@{/css/customer-style.css}"/>
+</head>
+<body>
+
+<h2>Neuen Kunden anlegen</h2>
+
+<form th:action="@{/customers/create}" th:object="${newCustomer}" method="post" class="inline-form">
+    <input type="text" th:field="*{firstName}" placeholder="Vorname" required/>
+    <input type="text" th:field="*{lastName}" placeholder="Nachname" required/>
+    <button type="submit">Anlegen</button>
+</form>
+
+<h2>Liste der Kunden</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Aktiv</th>
+        <th>Aktion</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <form th:action="@{'/customers/' + ${customer.id} + '/update'}" method="post">
+            <td th:text="${customer.id}"></td>
+            <td><input type="text" name="firstName" th:value="${customer.firstName}"/></td>
+            <td><input type="text" name="lastName" th:value="${customer.lastName}"/></td>
+            <td th:text="${customer.active} ? 'Ja' : 'Nein'"></td>
+            <td>
+                <button type="submit">Ändern</button>
+            </td>
+        </form>
+        <td>
+            <form th:action="@{'/customers/' + ${customer.id} + '/block'}" method="post" style="display:inline;">
+                <button type="submit" class="block" th:disabled="${!customer.active}">Blockieren</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

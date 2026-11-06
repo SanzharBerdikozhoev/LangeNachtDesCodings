@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: general('Login')}"></head>
+<body>
+<header></header>
+<main class="d-flex flex-column align-items-center gap-2 mt-4">
+    <h2 class="mb-3">Profile hinzufügen</h2>
+    <div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
+
+    <section class="profile pizza-add w-25 mt-4">
+        <div class="card card-body">
+            <form th:action="@{/profile/create}" method="post" class="mb-3 d-flex flex-column">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Vorname</label>
+                    <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Vorname"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Nachname</label>
+                    <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Nachname"
+                            class="form-control"
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-primary">profil hinzufügen</button>
+            </form>
+            <p class="text-center">
+                Nicht Autorisiert?
+            </p>
+            <div class="actions d-flex gap-2">
+                <a class="btn btn-outline-primary flex-1" th:href="@{/login}">anmelden</a>
+                <a class="btn btn-outline-tertiary flex-1" th:href="@{/}">zum Hauptmenu</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
