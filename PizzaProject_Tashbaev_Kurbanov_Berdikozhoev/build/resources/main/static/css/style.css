@@ -1,0 +1,32 @@
+.btn-outline-tertiary {
+  border-color: rgb(222, 226, 230);
+}
+
+.btn-outline-tertiary:hover {
+  border-color: transparent;
+  background-color: rgb(222, 226, 230);
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.border-width-2 {
+  border-width: 2px;
+}
+
+.gap-80 {
+    gap: 80px;
+}
+
+#toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+}

@@ -16,6 +16,14 @@
 
 <main class="d-flex flex-column align-items-center">
     <section class="pizza-list w-50 mt-4">
+        <form th:action="@{/}" method="get" class="d-flex gap-2 mb-3" role="search">
+            <label class="visually-hidden" for="pizza-search">Pizza suchen</label>
+            <input id="pizza-search" class="form-control" type="search" name="q"
+                   placeholder="Pizza suchen" th:value="${searchQuery}"/>
+            <button class="btn btn-outline-primary" type="submit">Suchen</button>
+            <a class="btn btn-outline-secondary" th:href="@{/}">Zurücksetzen</a>
+        </form>
+        <p th:if="${#lists.isEmpty(pizzas)}" class="text-muted">Keine Pizzen gefunden.</p>
         <table class="table table-bordered align-middle">
             <thead>
             <tr>
