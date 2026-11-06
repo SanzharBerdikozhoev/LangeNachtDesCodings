@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head th:replace="~{fragments/general :: general('Meine Bestellungen')}"></head>
+  <body>
+    <header
+      th:replace="~{fragments/header :: header('Meine Bestellungen')}"
+    ></header>
+    <main class="d-flex flex-column align-items-center gap-2">
+      <section class="order-list w-50 mt-4 d-flex flex-column gap-2">
+        <h1 class="fs-4 fw-normal text-center">Meine Bestellungen</h1>
+        <div
+          th:if="${#lists.isEmpty(ordered)}"
+          class="alert alert-info text-center"
+        >
+          Sie haben noch keine Bestellungen.
+        </div>
+        <div
+          th:each="order : ${ordered}"
+          class="order-card d-flex flex-column border-top"
+        >
+          <div class="order-header d-flex gap-4 p-2 border-start border-end">
+            <div class="order-info d-flex gap-2">
+              <strong>Bestellung ID:</strong>
+              <span th:text="${order.order.id}">1</span>
+            </div>
+            <div class="order-info d-flex gap-2">
+              <strong>Artikel:</strong>
+              <span th:text="${order.order.numberOfItems}"></span>
+            </div>
+            <div class="order-info d-flex gap-2">
+              <strong>Insgesamt:</strong>
+              <span th:text="${order.order.totalPrice} + ' €'"></span>
+            </div>
+              <div class="order-info d-flex gap-2">
+                  <strong>Lieferadresse:</strong>
+                  <span th:text="${order.deliveryAddress}"></span>
+              </div>
+          </div>
+          <table class="table table-bordered mb-0">
+            <thead>
+              <tr>
+                <th>Pizza</th>
+                <th>Größe</th>
+                <th>Menge</th>
+                <th>Preis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="item : ${order.order.items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${#strings.toLowerCase(item.size)}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price} + ' €'"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <a class="btn btn-outline-tertiary" href="/">zurück zum Menu</a>
+      </section>
+    </main>
+    <footer th:replace="~{fragments/footer}"></footer>
+  </body>
+</html>

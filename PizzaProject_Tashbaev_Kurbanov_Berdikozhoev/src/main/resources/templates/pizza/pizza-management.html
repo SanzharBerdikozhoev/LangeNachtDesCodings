@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/general :: general('Pizza Management')}"></head>
+<body>
+<header
+        th:replace="~{fragments/header :: header('Pizza Verwaltung')}"
+        class="header"
+></header>
+<main class="d-flex flex-column align-items-center gap-2">
+    <section class="pizza-add w-50 mt-4">
+        <table class="table table-bordered align-middle">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Small</th>
+                <th>Medium</th>
+                <th>Large</th>
+                <th>Handlungen</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pizza : ${pizzas}">
+                <td th:text="${pizza.name}"></td>
+                <td th:text="${pizza.priceSmall}"></td>
+                <td th:text="${pizza.priceMedium}"></td>
+                <td th:text="${pizza.priceLarge}"></td>
+                <td class="d-flex gap-2">
+                    <a
+                            class="btn btn-success flex-1"
+                            th:href="@{'/pizzas/edit/' + ${pizza.id}}"
+                    >Ändern</a
+                    >
+                    <a
+                            class="btn btn-danger flex-1"
+                            th:href="@{'/pizzas/delete/' + ${pizza.id}}"
+                            onclick="() => confirm('Delete this pizza?')"
+                    >Entfernen</a
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="pizza-add d-flex flex-column gap-2 w-50">
+        <h2 class="fs-4 fw-normal text-center">Pizza hinzufügen</h2>
+        <form
+                th:object="${newPizza}"
+                th:action="@{/pizzas/add}"
+                class="d-flex flex-column gap-2"
+                method="post"
+        >
+            <div class="form-group">
+                <label>Name:</label>
+                <input required class="form-control" type="text" th:field="*{name}" />
+            </div>
+            <div class="form-group">
+                <label>Price (small):</label>
+                <input
+                        required
+                        class="form-control"
+                        type="number"
+                        step="0.01"
+                        th:field="*{priceSmall}"
+                />
+            </div>
+            <div class="form-group">
+                <label>Price (medium):</label>
+                <input
+                        required
+                        class="form-control"
+                        type="number"
+                        step="0.01"
+                        th:field="*{priceMedium}"
+                />
+            </div>
+            <div class="form-group">
+                <label>Price (large):</label>
+                <input
+                        required
+                        class="form-control"
+                        type="number"
+                        step="0.01"
+                        th:field="*{priceLarge}"
+                />
+            </div>
+            <button class="btn btn-primary" type="submit">hinzufügen</button>
+        </form>
+        <a class="btn btn-outline-tertiary" th:href="@{/}">zurück zum Menu</a>
+    </section>
+</main>
+<footer th:replace="~{fragments/footer}" class="footer"></footer>
+</body>
+</html>

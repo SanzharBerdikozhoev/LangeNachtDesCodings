@@ -1,0 +1,39 @@
+<div th:fragment="address-form(form, redirectUrl)" class="modal fade" id="addAddressModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="addressForm" th:action="@{/address/add}" th:object="${form}" method="post">
+            <input type="hidden" name="redirectUrl" th:value="${redirectUrl}" />
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Neue Lieferadresse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Straße</label>
+                        <input type="text" th:field="*{street}" class="form-control" required/>
+                        <div th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="text-danger small mt-1"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hausnummer</label>
+                        <input type="text" th:field="*{houseNumber}" class="form-control" required/>
+                        <div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}" class="text-danger small mt-1"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ort</label>
+                        <input type="text" th:field="*{town}" class="form-control" required/>
+                        <div th:if="${#fields.hasErrors('town')}" th:errors="*{town}" class="text-danger small mt-1"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Postleitzahl</label>
+                        <input type="text" th:field="*{postalCode}" class="form-control" required/>
+                        <div th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="text-danger small mt-1"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary">Abbrechen</button>
+                    <button type="submit" class="btn btn-outline-primary">Speichern</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
