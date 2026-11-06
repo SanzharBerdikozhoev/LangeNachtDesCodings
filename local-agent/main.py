@@ -15,7 +15,7 @@ from fastapi import BackgroundTasks, FastAPI, Header, HTTPException, Request
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 
-ENV_PATH = BASE_DIR / "doc-automizer" / "local-agent" / ".env"
+ENV_PATH = Path(__file__).resolve().parent / ".env"
 load_dotenv(ENV_PATH)
 
 WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
