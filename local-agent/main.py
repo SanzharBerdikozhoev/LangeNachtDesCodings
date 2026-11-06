@@ -54,13 +54,33 @@ async def github_webhook(
             detail=f"Script not found: {SCRIPT_PATH}",
         )
 
-    result = subprocess.run(
-        ["bash", str(SCRIPT_PATH)],
-        cwd=REPO_PATH,
-        capture_output=True,
-        text=True,
-        timeout=600,
-    )
+    # result = subprocess.run(
+    #     ["bash", str(SCRIPT_PATH)],
+    #     cwd=REPO_PATH,
+    #     capture_output=True,
+    #     text=True,
+    #     timeout=600,
+    # )
+    logger.info("BASE_DIR: %s", BASE_DIR)
+    logger.info("REPO_PATH: %s", REPO_PATH)
+    logger.info("SCRIPT_PATH: %s", SCRIPT_PATH)
+
+    try:
+        result = subprocess.run(
+            ["bash", str(SCRIPT_PATH)],
+            cwd=REPO_PATH,
+            capture_output=True,
+            text=True,
+            timeout=600,
+        )
+
+        logger.info("Script return code: %s", result.returncode)
+        logger.info("Script stdout: %s", result.stdout)
+        logger.error("Script stderr: %s", result.stderr)
+
+    except Exception:
+        logger.exception("Failed to run documentation script")
+        raise
 
     if result.returncode != 0:
         raise HTTPException(
