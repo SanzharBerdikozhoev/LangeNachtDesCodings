@@ -13,7 +13,7 @@ WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
 
 app = FastAPI()
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[1]
 
 REPO_PATH = BASE_DIR / "PizzaProject_Tashbaev_Kurbanov_Berdikozhoev"
 SCRIPT_PATH = BASE_DIR / "update-arc42-docs.sh"
