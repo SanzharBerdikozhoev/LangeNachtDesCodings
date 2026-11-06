@@ -54,16 +54,20 @@ async def github_webhook(
             detail=f"Script not found: {SCRIPT_PATH}",
         )
 
-    # result = subprocess.run(
-    #     ["bash", str(SCRIPT_PATH)],
-    #     cwd=REPO_PATH,
-    #     capture_output=True,
-    #     text=True,
-    #     timeout=600,
-    # )
-    logger.info("BASE_DIR: %s", BASE_DIR)
-    logger.info("REPO_PATH: %s", REPO_PATH)
-    logger.info("SCRIPT_PATH: %s", SCRIPT_PATH)
+    import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("BASE_DIR: %s", BASE_DIR)
+logger.info("REPO_PATH: %s", REPO_PATH)
+logger.info("SCRIPT_PATH: %s", SCRIPT_PATH)
+
+if not REPO_PATH.is_dir():
+    raise HTTPException(
+        status_code=500,
+        detail=f"Project directory not found: {REPO_PATH}"
+    )
 
     try:
         result = subprocess.run(
@@ -74,18 +78,33 @@ async def github_webhook(
             timeout=600,
         )
 
-        logger.info("Script return code: %s", result.returncode)
-        logger.info("Script stdout: %s", result.stdout)
-        logger.error("Script stderr: %s", result.stderr)
+        logger.info("STDOUT:\n%s", result.stdout)
+        logger.info("STDERR:\n%s", result.stderr)
+        logger.info("RETURN CODE: %s", result.returncode)
 
-    except Exception:
-        logger.exception("Failed to run documentation script")
-        raise
+        if result.returncode != 0:
+            raise HTTPException(
+                status_code=500,
+                detail={
+                    "error": "Script execution failed",
+                    "stderr": result.stderr,
+                    "stdout": result.stdout,
+                    "returncode": result.returncode,
+                },
+            )
 
-    if result.returncode != 0:
+    except subprocess.TimeoutExpired:
+        logger.exception("Script timeout")
         raise HTTPException(
             status_code=500,
-            detail=result.stderr,
+            detail="Script execution timed out"
+        )
+
+    except OSError:
+        logger.exception("Failed to start script")
+        raise HTTPException(
+            status_code=500,
+            detail="Could not start documentation script"
         )
 
     return {
