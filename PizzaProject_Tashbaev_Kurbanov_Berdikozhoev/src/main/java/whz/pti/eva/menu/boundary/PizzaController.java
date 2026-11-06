@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import whz.pti.eva.cart.service.CartService;
 import whz.pti.eva.menu.domain.Pizza;
 import whz.pti.eva.menu.service.PizzaService;
@@ -41,7 +42,7 @@ public class PizzaController {
      * @return Name der View für das Pizza-Menü
      */
     @GetMapping("/")
-    public String getAllPizza(Model model) {
+    public String getAllPizza(@RequestParam(defaultValue = "") String q, Model model) {
         Optional<User> currentUser = CurrentUserUtils.getUser();
 
         if(currentUser.isEmpty()) {
@@ -52,7 +53,8 @@ public class PizzaController {
             model.addAttribute("cart", cartService.findByUserId(loginName));
         }
 
-        model.addAttribute("pizzas", pizzaService.listAll());
+        model.addAttribute("pizzas", pizzaService.searchByName(q));
+        model.addAttribute("searchQuery", q);
 
         return "pizza/pizza-menu";
     }

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head th:replace="~{fragments/general :: general('Mein Profil')}"></head>
+
+<body>
+
+<div id="toast"
+     th:if="${message}"
+     th:text="${message}"
+     th:data-type="${messageType}">
+</div>
+
+
+<header th:replace="~{fragments/header ::
+        header(${currentUser != null} ? 'Hallo, ' + ${currentUser.loginName} + ' :: was kann ich für dich tun?' : 'hallo :: was kann ich für dich tun?')}"
+        class="header">
+</header>
+
+<main class="d-flex flex-column align-items-center">
+    <section class="w-50 mt-4">
+
+        <div th:if="${hasCustomer}">
+            <h2 class="mb-3">Ihr Kundenprofil</h2>
+            <div class="bg-white p-3 border rounded">
+                <p class="mb-1"><strong>Vorname:</strong> <span
+                        th:text="${customer.firstName == '' ? 'Bitte geben sie ihre Vorname ein' : customer.firstName}"></span>
+                </p>
+                <p class="mb-1"><strong>Nachname:</strong> <span
+                        th:text="${customer.lastName == '' ? 'Bitte geben sie ihre Nachname ein' : customer.lastName}"></span>
+                </p>
+                <p class="text-success fw-bold">Sie können jetzt Pizza bestellen!</p>
+            </div>
+
+            <button class="btn btn-outline-secondary mt-3"
+                    data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                Profil bearbeiten
+            </button>
+
+            <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+                <h3 class="fs-6 fw-normal mb-0">Ihre Lieferadressen</h3>
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                    + Adresse hinzufügen
+                </button>
+            </div>
+
+            <div th:if="${customer.deliveryAddresses == null or customer.deliveryAddresses.isEmpty()}"
+                 class="alert alert-info">
+                Sie haben noch keine Lieferadresse hinzugefügt.
+            </div>
+
+            <table class="table table-bordered align-middle"
+                   th:if="${customer.deliveryAddresses != null and !customer.deliveryAddresses.isEmpty()}">
+                <thead>
+                <tr>
+                    <th>Ort</th>
+                    <th>Straße & Hausnummer</th>
+                    <th>PLZ</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="addr : ${customer.deliveryAddresses}">
+                    <td th:text="${addr.town}"></td>
+                    <td th:text="${addr.street} + ' ' + ${addr.houseNumber}"></td>
+                    <td th:text="${addr.postalCode}"></td>
+                    <td>
+                        <div class="d-flex">
+                            <form th:action="@{/address/delete/{id}(id=${addr.id})}"
+                                  method="post"
+                                  onsubmit="return confirm('Diese Adresse wirklich löschen?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm me-4">Löschen</button>
+                            </form>
+
+                            <button type="button" class="btn btn-outline-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    th:data-bs-target="'#editAddressModal-' + ${addr.id}">
+                                Ändern
+                            </button>
+                        </div>
+
+                        <!-- Мodal: Address bearbeiten -->
+                        <div class="modal fade" th:id="'editAddressModal-' + ${addr.id}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Adresse bearbeiten</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <form th:action="@{/address/update/{id}(id=${addr.id})}" method="post">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Straße</label>
+                                                <input type="text" name="street" class="form-control" th:value="${addr.street}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Hausnummer</label>
+                                                <input type="text" name="houseNumber" class="form-control" th:value="${addr.houseNumber}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Ort</label>
+                                                <input type="text" name="town" class="form-control" th:value="${addr.town}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">PLZ</label>
+                                                <input type="text" name="postalCode" class="form-control" th:value="${addr.postalCode}" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                                            <button type="submit" class="btn btn-primary">Speichern</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a class="btn btn-outline-tertiary w-100" th:href="@{/}">zurück zum Menu</a>
+        </div>
+
+        <div th:if="${!hasCustomer}" class="text-center mt-4">
+            <h2>Erstellen Sie Ihr Kundenprofil</h2>
+            <p class="lead">Um Pizza zu bestellen, müssen Sie Ihren Vor- und Nachnamen angeben.</p>
+            <a th:href="@{/profile/create}" class="btn btn-outline-primary">
+                Kundenprofil erstellen
+            </a>
+        </div>
+    </section>
+</main>
+
+
+<!-- Modal: Profil bearbeiten -->
+<div th:if="${hasCustomer}">
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Kundenprofil bearbeiten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form th:action="@{/customers/{id}/update(id=${customer.id})}" method="post">
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Vorname</label>
+                            <input type="text" name="firstName" class="form-control"
+                                   th:value="${customer.firstName}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nachname</label>
+                            <input type="text" name="lastName" class="form-control"
+                                   th:value="${customer.lastName}" required>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Abbrechen
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">Speichern</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</td>
+<div th:replace="~{fragments/address-form :: address-form(form=${form}, redirectUrl='')}"></div>
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toast = document.getElementById("toast");
+        if (toast && toast.textContent.trim() !== "") {
+            const type = toast.getAttribute("data-type") || "success";
+            if (type === "warning") {
+                toast.style.background = "#f0ad4e";
+                toast.style.color = "black";
+            } else {
+                toast.style.background = "#28a745";
+                toast.style.color = "white";
+            }
+            toast.style.opacity = "1";
+            setTimeout(() => toast.style.opacity = "0", type === "success" ? 5000 : 3000);
+        }
+    });
+</script>
+
+</body>
+</html>

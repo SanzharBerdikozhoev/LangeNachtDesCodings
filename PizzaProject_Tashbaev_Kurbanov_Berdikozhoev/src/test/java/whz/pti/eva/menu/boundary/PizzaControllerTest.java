@@ -42,7 +42,7 @@ class PizzaControllerTest {
         try (MockedStatic<CurrentUserUtils> utils = mockStatic(CurrentUserUtils.class)) {
             utils.when(CurrentUserUtils::getUser).thenReturn(Optional.empty());
 
-            when(pizzaService.listAll()).thenReturn(List.of(
+            when(pizzaService.searchByName("")).thenReturn(List.of(
                     new Pizza("Margherita", BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN)
             ));
             when(cartService.getSessionItems()).thenReturn(List.of());
@@ -65,7 +65,7 @@ class PizzaControllerTest {
             when(user.getLoginName()).thenReturn("baitur");
             utils.when(CurrentUserUtils::getUser).thenReturn(Optional.of(user));
 
-            when(pizzaService.listAll()).thenReturn(List.of(
+            when(pizzaService.searchByName("")).thenReturn(List.of(
                     new Pizza("Pepperoni", BigDecimal.valueOf(12), BigDecimal.valueOf(12), BigDecimal.valueOf(12))
             ));
             when(cartService.findByUserId("baitur")).thenReturn(new whz.pti.eva.cart.domain.Cart());

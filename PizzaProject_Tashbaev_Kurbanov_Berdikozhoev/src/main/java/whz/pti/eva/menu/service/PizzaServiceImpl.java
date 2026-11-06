@@ -33,6 +33,14 @@ public class PizzaServiceImpl implements PizzaService {
         return pizzaRepository.findAll();
     }
 
+    @Override
+    public List<Pizza> searchByName(String name) {
+        if (name == null || name.isBlank()) {
+            return listAll();
+        }
+        return pizzaRepository.findByNameContainingIgnoreCase(name.trim());
+    }
+
     /**
      * Ruft eine Pizza anhand ihrer ID ab.
      * @param id ID der Pizza

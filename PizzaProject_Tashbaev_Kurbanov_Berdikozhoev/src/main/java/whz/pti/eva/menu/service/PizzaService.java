@@ -17,6 +17,9 @@ public interface PizzaService {
      */
     List<Pizza> listAll();
 
+    /** Finds pizzas whose name contains the supplied text, ignoring case. */
+    List<Pizza> searchByName(String name);
+
     /**
      * Ruft eine Pizza anhand ihrer ID ab.
      * @param id ID der Pizza

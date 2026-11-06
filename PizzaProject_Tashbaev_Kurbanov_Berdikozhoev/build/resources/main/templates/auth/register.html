@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: general('Login')}"></head>
+<body>
+<header></header>
+<main class="d-flex flex-column align-items-center gap-2 mt-4">
+    <h2 class="mb-3">Registrieren</h2>
+    <div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
+
+    <section class="register pizza-add w-25 mt-4">
+        <div class="card card-body">
+            <form th:action="@{/register}" method="post" class="mb-3 d-flex flex-column">
+                <div class="mb-3">
+                    <label for="loginName" class="form-label">Loginname</label>
+                    <input
+                            type="text"
+                            id="loginName"
+                            name="loginName"
+                            placeholder="loginname"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Passwort</label>
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="passwort"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="passwordRepeated" class="form-label">Passwort wiederholen</label>
+                    <input
+                            type="password"
+                            id="passwordRepeated"
+                            name="passwordRepeated"
+                            placeholder="passwort wiederholen"
+                            class="form-control"
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary">registrieren</button>
+            </form>
+            <p class="text-center">
+                Haben sie schon einen Konto?
+            </p>
+            <div class="actions d-flex gap-2">
+                <a class="btn btn-outline-primary flex-1" th:href="@{/login}">anmelden</a>
+                <a class="btn btn-outline-tertiary flex-1" th:href="@{/}">zum Hauptmenu</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
