@@ -5,7 +5,7 @@
 # Requirements: git, a configured AI CLI, and (for automatic PR creation) gh.
 # Configure REPO_URL, WORKDIR_ROOT, AGENT_CMD, and optionally DOCS_PATH.
 # The agent CLI must accept the prompt as its final argument. Example:
-#   AGENT_CMD="claude -p" ./update-arc42-docs.sh
+#   AGENT_CMD="-opencode run" ./update-arc42-docs.sh
 # For another CLI, adapt AGENT_CMD to its prompt-input convention.
 #
 # Important: run this with a GitHub token that can push branches and create PRs.
@@ -18,7 +18,7 @@ set -Eeuo pipefail
 : "${MAIN_BRANCH:=main}"
 : "${DOCS_PATH:=docs/arc42}"
 : "${POLL_SECONDS:=300}"
-: "${AGENT_CMD:=claude -p}"
+: "${AGENT_CMD="${AGENT_CMD:-opencode run}"
 : "${STATE_FILE:=${WORKDIR_ROOT}/last-processed-main}"
 : "${PR_CREATE:=true}"
 
@@ -38,7 +38,7 @@ run_agent() {
   local repo_dir="$1"
   local prompt="$2"
 
-  # AGENT_CMD is intentionally a configurable command string (e.g. "claude -p"
+  # AGENT_CMD is intentionally a configurable command string (e.g. "-opencode run"
   # or "opencode run"). Treat this environment variable as trusted configuration.
   # shellcheck disable=SC2086
   (cd "$repo_dir" && $AGENT_CMD "$prompt")
