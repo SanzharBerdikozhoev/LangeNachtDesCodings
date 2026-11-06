@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-//comment just to check documentaion updates
+//comment just to check documentaion updates (Zweite Versuch)
 @SpringBootApplication
 public class PizzaProjectTashbaevKurbanovBerdikozhoevApplication {
 
