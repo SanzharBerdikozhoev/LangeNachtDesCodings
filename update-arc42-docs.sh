@@ -13,6 +13,13 @@
 
 set -Eeuo pipefail
 
+export REPO_URL="https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings.git"
+export MAIN_BRANCH="main"
+export DOCS_PATH="PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42"
+export POLL_SECONDS="300"
+export AGENT_CMD="opencode run"
+export PR_CREATE="true"
+
 : "${REPO_URL:?Set REPO_URL to the GitHub clone URL, e.g. https://github.com/org/repo.git}"
 : "${WORKDIR_ROOT:=${TMPDIR:-/tmp}/arc42-doc-agent}"
 : "${MAIN_BRANCH:=main}"
