@@ -11,6 +11,7 @@ This guide currently targets one documentation agent. The responsibilities can l
 PizzaProject is a web-based pizza ordering application implemented as a Spring Boot application. It supports menu/pizza management, user authentication and authorization, customer profiles and delivery addresses, shopping carts, orders, and payment-related flows.
 
 Observed technology baseline:
+
 - Java 21 (Gradle toolchain)
 - Spring Boot 3.5.6
 - Spring MVC / Thymeleaf server-rendered UI
@@ -25,20 +26,20 @@ Do not assume external deployment infrastructure, production database, payment p
 
 Application package: `whz.pti.eva`
 
-| Package / path | Responsibility |
-|---|---|
-| `auth/` | Security configuration and login-success handling |
-| `user/` | User and role domain, user-facing controllers, current-user details/service |
-| `customer/` | Customer profile and delivery-address domain, controllers, services, forms |
-| `menu/` | Pizza/menu domain, repository, service, menu and management controller, data initialization |
-| `cart/` | Cart domain/repositories, service, controller, and session-cart support |
-| `ordered/` | Order and ordered-item domain, repositories, service, controller, order DTOs |
-| `payment/` | Payment controller/service and payment DTOs; do not describe this as a real external payment integration unless verified |
-| `common/` | Shared base entity, database initialization, exceptions, current-user/session utilities |
-| `src/main/resources/templates/` | Thymeleaf views grouped by feature (`auth`, `cart`, `customer`, `ordered`, `pizza`) plus shared fragments |
-| `src/main/resources/static/` | CSS and static images |
-| `src/main/resources/application.properties` | Runtime application configuration |
-| `src/test/` | Automated tests (inspect actual test tree before documenting coverage) |
+| Package / path                              | Responsibility                                                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `auth/`                                     | Security configuration and login-success handling                                                                        |
+| `user/`                                     | User and role domain, user-facing controllers, current-user details/service                                              |
+| `customer/`                                 | Customer profile and delivery-address domain, controllers, services, forms                                               |
+| `menu/`                                     | Pizza/menu domain, repository, service, menu and management controller, data initialization                              |
+| `cart/`                                     | Cart domain/repositories, service, controller, and session-cart support                                                  |
+| `ordered/`                                  | Order and ordered-item domain, repositories, service, controller, order DTOs                                             |
+| `payment/`                                  | Payment controller/service and payment DTOs; do not describe this as a real external payment integration unless verified |
+| `common/`                                   | Shared base entity, database initialization, exceptions, current-user/session utilities                                  |
+| `src/main/resources/templates/`             | Thymeleaf views grouped by feature (`auth`, `cart`, `customer`, `ordered`, `pizza`) plus shared fragments                |
+| `src/main/resources/static/`                | CSS and static images                                                                                                    |
+| `src/main/resources/application.properties` | Runtime application configuration                                                                                        |
+| `src/test/`                                 | Automated tests (inspect actual test tree before documenting coverage)                                                   |
 
 Within feature packages, `boundary/` generally contains web controllers, `domain/` contains entities/repositories/forms, and `service/` contains application/service logic. Confirm the actual classes before asserting a specific dependency or flow.
 
@@ -66,6 +67,7 @@ Within feature packages, `boundary/` generally contains web controllers, `domain
 ## Expected output
 
 A documentation change should include:
+
 - Updated arc42 Markdown chapter(s)
 - A concise evidence-based change summary
 - A list of chapters updated and why
