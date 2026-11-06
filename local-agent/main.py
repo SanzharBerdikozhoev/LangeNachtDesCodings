@@ -1,38 +1,103 @@
+
 import hashlib
 import hmac
+import logging
 import os
 import subprocess
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import BackgroundTasks, FastAPI, Header, HTTPException, Request
 
-load_dotenv()
-
-WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
-
-app = FastAPI()
+# --------------------------------------------------
+# Configuration
+# --------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parents[1]
+
+ENV_PATH = BASE_DIR / "doc-automizer" / "local-agent" / ".env"
+load_dotenv(ENV_PATH)
+
+WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
 
 REPO_PATH = BASE_DIR / "PizzaProject_Tashbaev_Kurbanov_Berdikozhoev"
 SCRIPT_PATH = BASE_DIR / "update-arc42-docs.sh"
 
+app = FastAPI(title="Documentation Automizer")
+
+# --------------------------------------------------
+# Logging
+# --------------------------------------------------
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+
+logger = logging.getLogger(__name__)
+
+# --------------------------------------------------
+# Background documentation update
+# --------------------------------------------------
+
+def update_documentation():
+    logger.info("Starting documentation update")
+    logger.info("Repository: %s", REPO_PATH)
+    logger.info("Script: %s", SCRIPT_PATH)
+
+    try:
+        result = subprocess.run(
+            ["bash", str(SCRIPT_PATH)],
+            cwd=REPO_PATH,
+            capture_output=True,
+            text=True,
+            timeout=1800,
+        )
+
+        logger.info("Script return code: %s", result.returncode)
+
+        if result.stdout:
+            logger.info("Script stdout:\n%s", result.stdout)
+
+        if result.stderr:
+            logger.error("Script stderr:\n%s", result.stderr)
+
+        if result.returncode != 0:
+            logger.error("Documentation update failed")
+            return
+
+        logger.info("Documentation update completed successfully")
+
+    except subprocess.TimeoutExpired:
+        logger.exception("Documentation update timed out")
+
+    except Exception:
+        logger.exception("Unexpected error during documentation update")
+
+
+# --------------------------------------------------
+# GitHub Webhook
+# --------------------------------------------------
 
 @app.post("/github-webhook")
 async def github_webhook(
     request: Request,
+    background_tasks: BackgroundTasks,
     x_hub_signature_256: str = Header(default=""),
     x_github_event: str = Header(default=""),
 ):
+    # Check secret
     if not WEBHOOK_SECRET:
+        logger.error("GITHUB_WEBHOOK_SECRET is not configured")
         raise HTTPException(
             status_code=500,
             detail="Webhook secret is not configured",
         )
 
+    # Read request body
     body = await request.body()
 
+    # Verify GitHub signature
     expected_signature = "sha256=" + hmac.new(
         WEBHOOK_SECRET.encode(),
         body,
@@ -43,71 +108,51 @@ async def github_webhook(
         expected_signature,
         x_hub_signature_256,
     ):
-        raise HTTPException(status_code=401, detail="Invalid signature")
+        logger.warning("Invalid GitHub webhook signature")
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid signature",
+        )
 
+    # Process only push events
     if x_github_event != "push":
+        logger.info("Ignoring GitHub event: %s", x_github_event)
         return {"message": "Event ignored"}
 
-    if not SCRIPT_PATH.exists():
+    # Check paths
+    if not REPO_PATH.is_dir():
+        logger.error("Repository directory not found: %s", REPO_PATH)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Repository directory not found: {REPO_PATH}",
+        )
+
+    if not SCRIPT_PATH.is_file():
+        logger.error("Script not found: %s", SCRIPT_PATH)
         raise HTTPException(
             status_code=500,
             detail=f"Script not found: {SCRIPT_PATH}",
         )
 
-    import logging
+    # Schedule background task
+    background_tasks.add_task(update_documentation)
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-logger.info("BASE_DIR: %s", BASE_DIR)
-logger.info("REPO_PATH: %s", REPO_PATH)
-logger.info("SCRIPT_PATH: %s", SCRIPT_PATH)
-
-if not REPO_PATH.is_dir():
-    raise HTTPException(
-        status_code=500,
-        detail=f"Project directory not found: {REPO_PATH}"
-    )
-
-    try:
-        result = subprocess.run(
-            ["bash", str(SCRIPT_PATH)],
-            cwd=REPO_PATH,
-            capture_output=True,
-            text=True,
-            timeout=600,
-        )
-
-        logger.info("STDOUT:\n%s", result.stdout)
-        logger.info("STDERR:\n%s", result.stderr)
-        logger.info("RETURN CODE: %s", result.returncode)
-
-        if result.returncode != 0:
-            raise HTTPException(
-                status_code=500,
-                detail={
-                    "error": "Script execution failed",
-                    "stderr": result.stderr,
-                    "stdout": result.stdout,
-                    "returncode": result.returncode,
-                },
-            )
-
-    except subprocess.TimeoutExpired:
-        logger.exception("Script timeout")
-        raise HTTPException(
-            status_code=500,
-            detail="Script execution timed out"
-        )
-
-    except OSError:
-        logger.exception("Failed to start script")
-        raise HTTPException(
-            status_code=500,
-            detail="Could not start documentation script"
-        )
+    logger.info("GitHub push received. Documentation update scheduled.")
 
     return {
-        "message": "Documentation update completed",
-        "output": result.stdout,
+        "message": "Webhook received successfully",
+        "status": "Documentation update scheduled",
+    }
+
+
+# --------------------------------------------------
+# Health check
+# --------------------------------------------------
+
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "running",
+        "repository_exists": REPO_PATH.is_dir(),
+        "script_exists": SCRIPT_PATH.is_file(),
     }
