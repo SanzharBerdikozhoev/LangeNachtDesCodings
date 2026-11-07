@@ -41,7 +41,12 @@ AGENT_CMD="${AGENT_CMD:-opencode run}"
 
 PR_CREATE="${PR_CREATE:-true}"
 
-WORKDIR_ROOT="${WORKDIR_ROOT:-${TMPDIR:-/tmp}/arc42-doc-agent}"
+DESKTOP_DIR="${XDG_DESKTOP_DIR:-}"
+if [[ -z "$DESKTOP_DIR" ]] && command -v xdg-user-dir >/dev/null 2>&1; then
+    DESKTOP_DIR="$(xdg-user-dir DESKTOP)"
+fi
+DESKTOP_DIR="${DESKTOP_DIR:-$HOME/Desktop}"
+WORKDIR_ROOT="${WORKDIR_ROOT:-${DESKTOP_DIR}/arc42-doc-agent}"
 
 STATE_DIR="${STATE_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/arc42-doc-agent}"
 
@@ -70,9 +75,6 @@ fail() {
 RUN_DIR=""
 
 cleanup() {
-    if [[ -n "${RUN_DIR:-}" && -d "${RUN_DIR:-}" ]]; then
-        rm -rf -- "$RUN_DIR"
-    fi
     if [[ -d "${LOCK_DIR:-}" ]]; then
         rm -rf -- "$LOCK_DIR"
     fi
