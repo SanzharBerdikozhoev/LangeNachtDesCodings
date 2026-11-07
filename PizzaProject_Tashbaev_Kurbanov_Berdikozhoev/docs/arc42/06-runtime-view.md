@@ -2,7 +2,7 @@
 
 ## 6.1 Browse menu
 
-The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. The controller returns the filtered list to `templates/pizza/pizza-menu.html`, where a GET form submits searches. The controller also loads the current user's or guest's cart as described below.
+The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. Optional `sort` and `direction` parameters select name or medium-price sorting and ascending or descending order. The controller returns the filtered, sorted list to `templates/pizza/pizza-menu.html`, where a GET form submits searches and sorting selections. The controller also loads the current user's or guest's cart as described below.
 
 ## 6.2 Cart as guest and after login
 

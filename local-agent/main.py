@@ -4,10 +4,18 @@ import hmac
 import logging
 import os
 import subprocess
+import threading
+from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, FastAPI, Header, HTTPException, Request
+from fastapi import (
+    BackgroundTasks,
+    FastAPI,
+    Header,
+    HTTPException,
+    Request,
+)
 
 # --------------------------------------------------
 # Configuration
@@ -23,6 +31,12 @@ WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
 REPO_PATH = BASE_DIR / "PizzaProject_Tashbaev_Kurbanov_Berdikozhoev"
 SCRIPT_PATH = BASE_DIR / "update-arc42-docs.sh"
 
+LOG_DIR = Path(__file__).resolve().parent / "logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+MAIN_BRANCH = "refs/heads/main"
+SCRIPT_TIMEOUT = 1800
+
 app = FastAPI(title="Documentation Automizer")
 
 # --------------------------------------------------
@@ -37,42 +51,90 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # --------------------------------------------------
+# Concurrency protection
+# --------------------------------------------------
+
+update_lock = threading.Lock()
+
+# --------------------------------------------------
 # Background documentation update
 # --------------------------------------------------
 
 def update_documentation():
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_file = LOG_DIR / f"documentation-{timestamp}.log"
+
     logger.info("Starting documentation update")
     logger.info("Repository: %s", REPO_PATH)
     logger.info("Script: %s", SCRIPT_PATH)
+    logger.info("Output log: %s", log_file)
 
     try:
-        result = subprocess.run(
-            ["bash", str(SCRIPT_PATH)],
-            cwd=REPO_PATH,
-            capture_output=True,
-            text=True,
-            timeout=1800,
-        )
+        with log_file.open(
+            "w",
+            encoding="utf-8",
+            buffering=1,
+        ) as output:
 
-        logger.info("Script return code: %s", result.returncode)
+            output.write(
+                f"Documentation update started: {datetime.now().isoformat()}\n"
+            )
+            output.flush()
 
-        if result.stdout:
-            logger.info("Script stdout:\n%s", result.stdout)
+            result = subprocess.run(
+                ["bash", str(SCRIPT_PATH)],
+                cwd=REPO_PATH,
+                stdout=output,
+                stderr=subprocess.STDOUT,
+                text=True,
+                timeout=SCRIPT_TIMEOUT,
+            )
 
-        if result.stderr:
-            logger.error("Script stderr:\n%s", result.stderr)
+            output.write(
+                f"\nScript exit code: {result.returncode}\n"
+            )
+            output.flush()
 
         if result.returncode != 0:
-            logger.error("Documentation update failed")
+            logger.error(
+                "Documentation update failed "
+                "(exit code %s). Log: %s",
+                result.returncode,
+                log_file,
+            )
             return
 
-        logger.info("Documentation update completed successfully")
+        logger.info(
+            "Documentation update completed successfully. Log: %s",
+            log_file,
+        )
 
     except subprocess.TimeoutExpired:
-        logger.exception("Documentation update timed out")
+        logger.exception(
+            "Documentation update timed out after %s seconds. Log: %s",
+            SCRIPT_TIMEOUT,
+            log_file,
+        )
 
     except Exception:
-        logger.exception("Unexpected error during documentation update")
+        logger.exception(
+            "Unexpected error during documentation update. Log: %s",
+            log_file,
+        )
+
+
+def run_documentation_update():
+    if not update_lock.acquire(blocking=False):
+        logger.warning(
+            "Documentation update already running. "
+            "Skipping duplicate execution."
+        )
+        return
+
+    try:
+        update_documentation()
+    finally:
+        update_lock.release()
 
 
 # --------------------------------------------------
@@ -99,7 +161,7 @@ async def github_webhook(
 
     # Verify GitHub signature
     expected_signature = "sha256=" + hmac.new(
-        WEBHOOK_SECRET.encode(),
+        WEBHOOK_SECRET.encode("utf-8"),
         body,
         hashlib.sha256,
     ).hexdigest()
@@ -117,31 +179,64 @@ async def github_webhook(
     # Process only push events
     if x_github_event != "push":
         logger.info("Ignoring GitHub event: %s", x_github_event)
-        return {"message": "Event ignored"}
+        return {
+            "message": "Event ignored",
+            "event": x_github_event,
+        }
+
+    # Parse GitHub payload
+    try:
+        payload = await request.json()
+    except ValueError:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid JSON payload",
+        )
+
+    # Process only main branch
+    ref = payload.get("ref", "")
+
+    if ref != MAIN_BRANCH:
+        logger.info("Ignoring push to branch: %s", ref)
+        return {
+            "message": "Push ignored",
+            "reason": "Not the main branch",
+            "ref": ref,
+        }
 
     # Check paths
     if not REPO_PATH.is_dir():
-        logger.error("Repository directory not found: %s", REPO_PATH)
+        logger.error(
+            "Repository directory not found: %s",
+            REPO_PATH,
+        )
         raise HTTPException(
             status_code=500,
-            detail=f"Repository directory not found: {REPO_PATH}",
+            detail="Repository directory not found",
         )
 
     if not SCRIPT_PATH.is_file():
-        logger.error("Script not found: %s", SCRIPT_PATH)
+        logger.error(
+            "Script not found: %s",
+            SCRIPT_PATH,
+        )
         raise HTTPException(
             status_code=500,
-            detail=f"Script not found: {SCRIPT_PATH}",
+            detail="Documentation script not found",
         )
 
     # Schedule background task
-    background_tasks.add_task(update_documentation)
+    background_tasks.add_task(run_documentation_update)
 
-    logger.info("GitHub push received. Documentation update scheduled.")
+    logger.info(
+        "GitHub push received on main. "
+        "Documentation update scheduled."
+    )
 
     return {
         "message": "Webhook received successfully",
         "status": "Documentation update scheduled",
+        "branch": "main",
     }
 
 
@@ -155,4 +250,6 @@ async def health_check():
         "status": "running",
         "repository_exists": REPO_PATH.is_dir(),
         "script_exists": SCRIPT_PATH.is_file(),
+        "log_directory": str(LOG_DIR),
+        "documentation_update_running": update_lock.locked(),
     }

@@ -20,6 +20,16 @@
             <label class="visually-hidden" for="pizza-search">Pizza suchen</label>
             <input id="pizza-search" class="form-control" type="search" name="q"
                    placeholder="Pizza suchen" th:value="${searchQuery}"/>
+            <label class="visually-hidden" for="pizza-sort">Sortieren nach</label>
+            <select id="pizza-sort" class="form-select" name="sort">
+                <option value="name" th:selected="${sort == 'name'}">Name</option>
+                <option value="price" th:selected="${sort == 'price'}">Preis (Medium)</option>
+            </select>
+            <label class="visually-hidden" for="pizza-direction">Reihenfolge</label>
+            <select id="pizza-direction" class="form-select" name="direction">
+                <option value="asc" th:selected="${direction == 'asc'}">Aufsteigend</option>
+                <option value="desc" th:selected="${direction == 'desc'}">Absteigend</option>
+            </select>
             <button class="btn btn-outline-primary" type="submit">Suchen</button>
             <a class="btn btn-outline-secondary" th:href="@{/}">Zurücksetzen</a>
         </form>

@@ -1,0 +1,479 @@
+Documentation update started: 2026-11-07T01:04:00.878309
+[2026-11-07T01:04:00+01:00] Documentation updater started.
+[2026-11-07T01:04:00+01:00] Repository: https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings.git
+[2026-11-07T01:04:00+01:00] Main branch: main
+[2026-11-07T01:04:00+01:00] Documentation: PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42
+[2026-11-07T01:04:00+01:00] Cloning repository...
+[2026-11-07T01:04:02+01:00] Current main SHA: 926815d4098c2da200e5bd6f401de2702222ddff
+[2026-11-07T01:04:02+01:00] Change base: 87533ce359198286a2c541d8f166350f9dcadb08
+[2026-11-07T01:04:02+01:00] Starting OpenCode...
+[0m
+> build · iceman-free
+[0m✗ [0mRead ARCHITECTURE_SKILLS.md failed
+[91m[1mError: [0mFile not found: /tmp/arc42-doc-agent/run.6bAW8m/repo/ARCHITECTURE_SKILLS.md
+[0m✗ [0mRead GITHUB_SKILLS.md failed
+[91m[1mError: [0mFile not found: /tmp/arc42-doc-agent/run.6bAW8m/repo/GITHUB_SKILLS.md
+[0m→ [0mRead AGENT.md 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.6bAW8m/repo --no-pager log --oneline -5
+926815d Change update-arc42-docs.sh
+2e655db Add comment to test documentation update
+db23464 Merge remote-tracking branch 'refs/remotes/origin/main'
+c1a52ba update agents bash script
+5fb1067 Add comment to test documentation update
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.6bAW8m/repo --no-pager diff --name-status 87533ce359198286a2c541d8f166350f9dcadb08 926815d4098c2da200e5bd6f401de2702222ddff
+R079	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/ARCHITECTURE_SKILLS.md	.github/workflows/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md
+R100	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/GITHUB_SKILLS.md	.github/workflows/.agents/skills/github/GITHUB_SKILLS.md
+R060	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/AGENT.md	AGENT.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/checksums/checksums.lock
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/checksums/sha1-checksums.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.lock
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileChanges/last-build.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.lock
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/resourceHashesCache.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/gc.properties
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/buildOutputCleanup/cache.properties
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/buildOutputCleanup/outputFiles.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/file-system.probe
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/vcs-1/gc.properties
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/application.properties
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/static/css/customer-style.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/static/css/reset.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/static/css/style.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/static/images/pizza-logo.png
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/auth/login.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/auth/register.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/cart/cart-list.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/customer/create-profile.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/customer/customers.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/customer/profile.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/fragments/address-form.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/fragments/footer.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/fragments/general.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/fragments/header.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/ordered/ordered.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/pizza/pizza-edit.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/pizza/pizza-management.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/pizza/pizza-menu.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/auth/LoginSuccessHandler.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/auth/SecurityConfig.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/boundary/CartController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/Cart.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/CartRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/Item.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/ItemRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/session/SessionCart.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/domain/session/SessionCartItem.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/service/CartService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/service/CartServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/service/ItemRequestDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/cart/service/SessionItemDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/db/InitializeDB.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/domain/BaseEntity.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/exceptions/CartNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/exceptions/CustomerNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/exceptions/ItemNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/exceptions/PaymentFailedException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/common/exceptions/PizzaNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/boundary/CustomerController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/boundary/DeliveryAddressController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/boundary/ProfileController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/Customer.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/CustomerRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/DeliveryAddress.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/DeliveryAddressForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/DeliveryAddressRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/ProfileAndAddressForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/domain/ProfileCreateForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/service/CustomerService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/service/CustomerServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/service/DeliveryAddressService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/customer/service/DeliveryAddressServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/boundary/PizzaController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/domain/Pizza.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/domain/PizzaRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/domain/PizzaSize.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/service/PizzaService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/service/PizzaServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/utils/DataInitializer.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/boundary/OrderedController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/domain/Ordered.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/domain/OrderedItem.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/domain/OrderedItemRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/domain/OrderedRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/service/OrderedService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/service/OrderedServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/service/OrderedWithDeliveryAddressDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/ordered/service/PendingOrderDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/boundary/BalanceControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/boundary/PaymentController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/service/PaymentService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/service/PaymentServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/service/dto/AccountResponseDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/payment/service/dto/TransferDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/boundary/CurrentUserControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/boundary/LoginController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/boundary/UserController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/domain/CurrentUser.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/domain/Role.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/domain/User.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/domain/UserCreateForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/domain/UserRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/UserDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/currentuser/CurrentUserDetailsService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/currentuser/CurrentUserUtils.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/user/UserService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/user/UserServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/user/service/validator/UserCreateFormValidator.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplicationTests.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/cart/boundary/CartControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/cart/service/CartServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/customer/boundary/CustomerControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/customer/boundary/DeliveryAddressControllerTest$ExceptionHandlerControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/customer/boundary/DeliveryAddressControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/customer/service/CustomerServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/customer/service/DeliveryAddressServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/menu/boundary/PizzaControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/menu/service/PizzaServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/ordered/boundary/OrderedControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/ordered/service/OrderedServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/user/boundary/UserControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/test/whz/pti/eva/user/service/UserServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/auth/LoginSuccessHandler.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/auth/SecurityConfig.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/boundary/CartController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/Cart.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/CartRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/Item.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/ItemRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/session/SessionCart.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/domain/session/SessionCartItem.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/service/CartService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/service/CartServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/service/ItemRequestDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/cart/service/SessionItemDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/db/InitializeDB.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/domain/BaseEntity.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/exceptions/CartNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/exceptions/CustomerNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/exceptions/ItemNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/exceptions/PaymentFailedException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/common/exceptions/PizzaNotFoundException.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/boundary/CustomerController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/boundary/DeliveryAddressController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/boundary/ProfileController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/Customer.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/CustomerRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/DeliveryAddress.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/DeliveryAddressForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/DeliveryAddressRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/ProfileAndAddressForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/domain/ProfileCreateForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/service/CustomerService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/service/CustomerServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/service/DeliveryAddressService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/customer/service/DeliveryAddressServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/boundary/PizzaController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/domain/Pizza$1.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/domain/Pizza.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/domain/PizzaRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/domain/PizzaSize.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/service/PizzaService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/service/PizzaServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/utils/DataInitializer.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/boundary/OrderedController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/domain/Ordered.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/domain/OrderedItem.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/domain/OrderedItemRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/domain/OrderedRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/service/OrderedService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/service/OrderedServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/service/OrderedWithDeliveryAddressDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/ordered/service/PendingOrderDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/boundary/BalanceControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/boundary/PaymentController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/service/PaymentService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/service/PaymentServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/service/dto/AccountResponseDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/payment/service/dto/TransferDTO.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/boundary/CurrentUserControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/boundary/LoginController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/boundary/UserController.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/domain/CurrentUser.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/domain/Role.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/domain/User.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/domain/UserCreateForm.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/domain/UserRepository.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/UserDto.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/currentuser/CurrentUserDetailsService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/currentuser/CurrentUserUtils.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/user/UserService.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/user/UserServiceImpl.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/user/service/validator/UserCreateFormValidator.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplicationTests.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/cart/boundary/CartControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/cart/service/CartServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/customer/boundary/CustomerControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/customer/boundary/DeliveryAddressControllerTest$ExceptionHandlerControllerAdvice.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/customer/boundary/DeliveryAddressControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/customer/service/CustomerServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/customer/service/DeliveryAddressServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/menu/boundary/PizzaControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/menu/service/PizzaServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/ordered/boundary/OrderedControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/ordered/service/OrderedServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/user/boundary/UserControllerTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/test/whz/pti/eva/user/service/UserServiceImplTest.class
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/reports/problems/problems-report.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/application.properties
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/static/css/customer-style.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/static/css/reset.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/static/css/style.css
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/static/images/pizza-logo.png
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/auth/login.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/auth/register.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/cart/cart-list.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/customer/create-profile.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/customer/customers.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/customer/profile.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/fragments/address-form.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/fragments/footer.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/fragments/general.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/fragments/header.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/ordered/ordered.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/pizza/pizza-edit.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/pizza/pizza-management.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/pizza/pizza-menu.html
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/test-results/test/binary/output.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/test-results/test/binary/output.bin.idx
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/previous-compilation-data.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileTestJava/previous-compilation-data.bin
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/01-introduction-and-goals.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/02-architecture-constraints.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/04-solution-strategy.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/05-building-block-view.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/07-deployment-view.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/08-concepts.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/09-architecture-decisions.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/10-quality-requirements.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/12-glossary.md
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java
+R100	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/README.md	README.md
+A	local-agent/.gitignore
+A	local-agent/__pycache__/main.cpython-314.pyc
+A	local-agent/main.py
+A	local-agent/requirements.txt
+A	update-arc42-docs.sh
+R100	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/update-arc42-docs.sh	update-arc42.yml
+> build · iceman-free
+[0m✱ [0mGlob "PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/*.md" [90m12 matches[0m
+[0m→ [0mRead .github/workflows/.agents/skills/github/GITHUB_SKILLS.md 
+[0m→ [0mRead .github/workflows/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build.gradle 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.6bAW8m/repo --no-pager diff 87533ce359198286a2c541d8f166350f9dcadb08 926815d4098c2da200e5bd6f401de2702222ddff -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java
+index 10184da..90498cd 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.java
+@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ import org.springframework.context.annotation.Bean;
+ 
++//comment just to check documentaion updates (Zweite Versuch)
+ @SpringBootApplication
+ public class PizzaProjectTashbaevKurbanovBerdikozhoevApplication {
+ 
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
+index 8cb9970..da18dc5 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
+@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.ModelAttribute;
+ import org.springframework.web.bind.annotation.PathVariable;
+ import org.springframework.web.bind.annotation.PostMapping;
++import org.springframework.web.bind.annotation.RequestParam;
+ import whz.pti.eva.cart.service.CartService;
+ import whz.pti.eva.menu.domain.Pizza;
+ import whz.pti.eva.menu.service.PizzaService;
+@@ -41,7 +42,7 @@ public class PizzaController {
+      * @return Name der View für das Pizza-Menü
+      */
+     @GetMapping("/")
+-    public String getAllPizza(Model model) {
++    public String getAllPizza(@RequestParam(defaultValue = "") String q, Model model) {
+         Optional<User> currentUser = CurrentUserUtils.getUser();
+ 
+         if(currentUser.isEmpty()) {
+@@ -52,7 +53,8 @@ public class PizzaController {
+             model.addAttribute("cart", cartService.findByUserId(loginName));
+         }
+ 
+-        model.addAttribute("pizzas", pizzaService.listAll());
++        model.addAttribute("pizzas", pizzaService.searchByName(q));
++        model.addAttribute("searchQuery", q);
+ 
+         return "pizza/pizza-menu";
+     }
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java
+index debc4fd..b9d062f 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java
+@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
+  * Ermöglicht Standard-CRUD-Operationen für Pizzen in der Datenbank.
+  */
+ public interface PizzaRepository extends JpaRepository<Pizza, Long> {
++    java.util.List<Pizza> findByNameContainingIgnoreCase(String name);
+ }
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java
+index dee8fc1..5279eef 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java
+@@ -17,6 +17,9 @@ public interface PizzaService {
+      */
+     List<Pizza> listAll();
+ 
++    /** Finds pizzas whose name contains the supplied text, ignoring case. */
++    List<Pizza> searchByName(String name);
++
+     /**
+      * Ruft eine Pizza anhand ihrer ID ab.
+      * @param id ID der Pizza
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java
+index ddc0c8d..d6fc08d 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaServiceImpl.java
+@@ -33,6 +33,14 @@ public class PizzaServiceImpl implements PizzaService {
+         return pizzaRepository.findAll();
+     }
+ 
++    @Override
++    public List<Pizza> searchByName(String name) {
++        if (name == null || name.isBlank()) {
++            return listAll();
++        }
++        return pizzaRepository.findByNameContainingIgnoreCase(name.trim());
++    }
++
+     /**
+      * Ruft eine Pizza anhand ihrer ID ab.
+      * @param id ID der Pizza
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+index 23b1961..9179678 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+@@ -16,6 +16,14 @@
+ 
+ <main class="d-flex flex-column align-items-center">
+     <section class="pizza-list w-50 mt-4">
++        <form th:action="@{/}" method="get" class="d-flex gap-2 mb-3" role="search">
++            <label class="visually-hidden" for="pizza-search">Pizza suchen</label>
++            <input id="pizza-search" class="form-control" type="search" name="q"
++                   placeholder="Pizza suchen" th:value="${searchQuery}"/>
++            <button class="btn btn-outline-primary" type="submit">Suchen</button>
++            <a class="btn btn-outline-secondary" th:href="@{/}">Zurücksetzen</a>
++        </form>
++        <p th:if="${#lists.isEmpty(pizzas)}" class="text-muted">Keine Pizzen gefunden.</p>
+         <table class="table table-bordered align-middle">
+             <thead>
+             <tr>
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java
+index dfed1ae..9f54010 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/test/java/whz/pti/eva/menu/boundary/PizzaControllerTest.java
+@@ -42,7 +42,7 @@ class PizzaControllerTest {
+         try (MockedStatic<CurrentUserUtils> utils = mockStatic(CurrentUserUtils.class)) {
+             utils.when(CurrentUserUtils::getUser).thenReturn(Optional.empty());
+ 
+-            when(pizzaService.listAll()).thenReturn(List.of(
++            when(pizzaService.searchByName("")).thenReturn(List.of(
+                     new Pizza("Margherita", BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN)
+             ));
+             when(cartService.getSessionItems()).thenReturn(List.of());
+@@ -65,7 +65,7 @@ class PizzaControllerTest {
+             when(user.getLoginName()).thenReturn("baitur");
+             utils.when(CurrentUserUtils::getUser).thenReturn(Optional.of(user));
+ 
+-            when(pizzaService.listAll()).thenReturn(List.of(
++            when(pizzaService.searchByName("")).thenReturn(List.of(
+                     new Pizza("Pepperoni", BigDecimal.valueOf(12), BigDecimal.valueOf(12), BigDecimal.valueOf(12))
+             ));
+             when(cartService.findByUserId("baitur")).thenReturn(new whz.pti.eva.cart.domain.Cart());
+@@ -146,4 +146,4 @@ class PizzaControllerTest {
+ 
+         verify(pizzaService).deleteById(7L);
+     }
+-}
+\ No newline at end of file
++}
+> build · iceman-free
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/04-solution-strategy.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/01-introduction-and-goals.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/05-building-block-view.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/10-quality-requirements.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/09-architecture-decisions.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/08-concepts.md 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/12-glossary.md 
+> build · iceman-free
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.6bAW8m/repo status --short
+(no output)
+> build · iceman-free
+## Documentation status
+**No documentation update was necessary.** No files under `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42` were modified.
+
+## Why no update was needed
+I reviewed the arc42 set (`PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/01`–`12`) against the current PizzaProject implementation and the relevant history (`87533ce359198286a2c541d8f166350f9dcadb08..926815d4098c2da200e5bd6f401de2702222ddff`, scoped to PizzaProject source). The architecture-relevant PizzaProject code changes in that range add pizza menu name search:
+- `GET /` accepts optional `q` and adds `pizzas`/`searchQuery` model attributes (`src/main/java/whz/pti/eva/menu/boundary/PizzaController.java`).
+- `PizzaService.searchByName` returns all pizzas for null/blank input, otherwise `findByNameContainingIgnoreCase` on the trimmed query (`src/main/java/whz/pti/eva/menu/service/PizzaService*.java`).
+- `PizzaRepository.findByNameContainingIgnoreCase` added (`src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java`).
+- Search GET form / empty-state message added to `src/main/resources/templates/pizza/pizza-menu.html`.
+
+This behavior is already accurately documented in **`docs/arc42/06-runtime-view.md` §6.1 “Browse menu”** (describes `q`, `PizzaService.searchByName`, blank vs non-blank/trimmed case-insensitive behavior, and the GET search form on `pizza-menu.html`). Other inspected chapters remain consistent with the current implementation (e.g., menu responsibilities in `05-building-block-view.md`, scope/capabilities in `01`/`03`). The application-class comment-only change and test-only changes are not architecture-documentation changes.
+
+## arc42 chapters changed
+None.
+
+## Evidence paths used
+- `AGENT.md` (root)
+- `.github/workflows/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md`
+- `.github/workflows/.agents/skills/github/GITHUB_SKILLS.md`
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build.gradle`
+- `git diff 87533ce..926815d -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/...` (scoped to changed PizzaProject source/template/test files)
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java`
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java`, `PizzaServiceImpl.java`
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/domain/PizzaRepository.java`
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html`
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/01-introduction-and-goals.md`, `03-system-scope-and-context.md`, `04-solution-strategy.md`, `05-building-block-view.md`, `06-runtime-view.md`, `08-concepts.md`, `09-architecture-decisions.md`, `10-quality-requirements.md`, `11-risks-and-technical-debt.md`, `12-glossary.md`
+
+## Checks performed
+- `git --no-pager log --oneline -5`
+- `git --no-pager diff --name-status 87533ce..926815d` (full range inspected; PizzaProject architecture-relevant source changes identified)
+- Scoped `git diff` for changed PizzaProject source/template/test files
+- Read current `PizzaController` and reviewed arc42 chapters against implementation
+- `git status --short` (clean working tree; no modifications made)
+- Confirmed I did **not** create commits/branches, push, or create a PR, and did **not** modify files outside `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42` (no files modified).
+
+## Remaining uncertainties
+- The arc42 files were present in the inspected commit range and already describe the menu search feature; I treated that as the current intended documentation state. A full re-audit of every arc42 statement against the entire codebase was not performed beyond the changes/evidence relevant to this run.
+- Production/runtime details (deployment topology, datasource beyond H2 dependency/properties, payment provider ownership/SLA, measurable quality targets) remain unspecified in the repository, as already noted in the arc42 docs; no unsupported claims were added.
+[2026-11-07T01:05:17+01:00] OpenCode finished successfully.
+[2026-11-07T01:05:17+01:00] OpenCode found no documentation changes.
+[2026-11-07T01:05:17+01:00] Checkpoint updated: 926815d4098c2da200e5bd6f401de2702222ddff
+
+Script exit code: 0

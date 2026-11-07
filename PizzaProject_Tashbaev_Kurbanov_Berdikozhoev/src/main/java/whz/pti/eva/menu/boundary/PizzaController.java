@@ -13,6 +13,8 @@ import whz.pti.eva.menu.service.PizzaService;
 import whz.pti.eva.user.domain.User;
 import whz.pti.eva.user.service.currentuser.CurrentUserUtils;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 /**
@@ -42,7 +44,10 @@ public class PizzaController {
      * @return Name der View für das Pizza-Menü
      */
     @GetMapping("/")
-    public String getAllPizza(@RequestParam(defaultValue = "") String q, Model model) {
+    public String getAllPizza(@RequestParam(defaultValue = "") String q,
+                              @RequestParam(defaultValue = "name") String sort,
+                              @RequestParam(defaultValue = "asc") String direction,
+                              Model model) {
         Optional<User> currentUser = CurrentUserUtils.getUser();
 
         if(currentUser.isEmpty()) {
@@ -53,8 +58,18 @@ public class PizzaController {
             model.addAttribute("cart", cartService.findByUserId(loginName));
         }
 
-        model.addAttribute("pizzas", pizzaService.searchByName(q));
+        var pizzas = new ArrayList<>(pizzaService.searchByName(q));
+        Comparator<Pizza> comparator = "price".equals(sort)
+                ? Comparator.comparing(Pizza::getPriceMedium)
+                : Comparator.comparing(Pizza::getName, String.CASE_INSENSITIVE_ORDER);
+        if ("desc".equals(direction)) {
+            comparator = comparator.reversed();
+        }
+        pizzas.sort(comparator);
+        model.addAttribute("pizzas", pizzas);
         model.addAttribute("searchQuery", q);
+        model.addAttribute("sort", "price".equals(sort) ? "price" : "name");
+        model.addAttribute("direction", "desc".equals(direction) ? "desc" : "asc");
 
         return "pizza/pizza-menu";
     }
