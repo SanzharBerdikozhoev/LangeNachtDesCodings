@@ -6,6 +6,7 @@
 | Cart | Shopping container; persisted for authenticated users or held in session for guests. |
 | Cart item (`Item`) | A pizza selection with size and quantity, associated with a cart and pizza. |
 | Session cart | Guest cart state represented by `SessionCart` and `SessionCartItem`. |
+| Favorite pizza (`FavoritePizza`) | Persisted association between a user's login-name identifier (`userId`) and a `Pizza`, used to save and list favorite pizzas. |
 | Order (`Ordered`) | Persisted checkout record containing order items, user identifier, delivery-address identifier, item count, and total price. |
 | Order item (`OrderedItem`) | Snapshot-like order line containing pizza identification/name, quantity, price, user identifier, and size. |
 | Customer | Profile data associated with a `User`; also related to delivery addresses. |

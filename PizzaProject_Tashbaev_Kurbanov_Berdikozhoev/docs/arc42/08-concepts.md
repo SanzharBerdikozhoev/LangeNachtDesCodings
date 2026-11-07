@@ -2,7 +2,7 @@
 
 ## Authentication and authorization
 
-`auth/SecurityConfig.java` configures form login, remember-me, logout, URL authorization, a DAO authentication provider, and a delegating password encoder. Static assets and H2 console paths are ignored by web security. URL rules distinguish anonymous/regular-user cart access, user-only order access, and admin-only pizza/customer management.
+`auth/SecurityConfig.java` configures form login, remember-me, logout, URL authorization, a DAO authentication provider, and a delegating password encoder. Static assets and H2 console paths are ignored by web security. URL rules distinguish anonymous/regular-user cart access, user-only order and favorite access (`/ordered/**`, `/favorites/**` require `USER` authority), and admin-only pizza/customer management.
 
 ## Persistence and identity
 

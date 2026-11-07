@@ -10,6 +10,7 @@ The repository implements a web application for browsing a pizza menu, maintaini
 - Register and authenticate users (`user/boundary/UserController.java`, `auth/SecurityConfig.java`).
 - Maintain customer profiles and delivery addresses (`customer/boundary/`).
 - Manage anonymous and authenticated carts (`cart/service/CartServiceImpl.java`).
+- Save, list, and remove favorite pizzas for authenticated users (`favorite/boundary/FavoritePizzaController.java`, `favorite/service/FavoritePizzaService.java`).
 - Place and view orders (`ordered/service/OrderedServiceImpl.java`).
 - Interact with an external payment HTTP API (`payment/service/PaymentServiceImpl.java`).
 
