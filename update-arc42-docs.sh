@@ -240,14 +240,22 @@ Follow the workflow in AGENT.md step by step:
 3. Read the current arc42 chapters in ${DOCS_PATH}.
 4. Update only stale or incomplete chapters. If no update is needed,
    change no file and stop after reporting why.
-5. If documentation changed: create a branch, commit only files under
-   ${DOCS_PATH}, and push the branch to origin.
+5. If documentation changed: BEFORE staging or committing, create and switch
+   to a new docs/arc42-auto-* branch from origin/${MAIN_BRANCH}. Verify with
+   git branch --show-current before proceeding. Never commit on ${MAIN_BRANCH}
+   and then create a branch pointing to that commit. Commit only files under
+   ${DOCS_PATH}; verify the branch again immediately before commit, then push
+   explicitly using git push -u origin <docs-branch> (never push ${MAIN_BRANCH}).
 6. ${PR_STEP}
 7. Report: updated chapters and why, evidence paths, checks performed,
    open questions, and the PR URL if a pull request was created.
 
 Hard rules:
 - Never push to ${MAIN_BRANCH} and never force-push.
+- Create/switch to the docs branch before staging or committing. If the current
+  branch is ${MAIN_BRANCH} at commit time, stop without committing or pushing.
+- If a commit was accidentally made on ${MAIN_BRANCH}, stop and report it; do
+  not push or rewrite/repair ${MAIN_BRANCH} without maintainer approval.
 - Never modify files outside ${DOCS_PATH}.
 - Base every statement on repository evidence; never invent architecture.
 - Do not claim a push or a pull request succeeded unless the command did.
