@@ -42,6 +42,7 @@
                 <th>Pizza</th>
                 <th>Preis+Größe</th>
                 <th>in den Warenkorb</th>
+                <th>Favorit</th>
             </tr>
             </thead>
             <tbody>
@@ -66,6 +67,11 @@
                         <button type="submit" class="btn btn-outline-primary">in den Warenkorb</button>
                     </form>
                 </td>
+                <td>
+                    <form th:action="@{|/favorites/${pizza.id}|}" method="post">
+                        <button type="submit" class="btn btn-outline-danger" th:disabled="${currentUser == null || currentUser.role.name() != 'USER'}" title="Als Favorit speichern">♡</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -88,6 +94,9 @@
         </a>
         <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'USER'}" th:href="@{/payment/account}">
             Zahlungskonto und Guthaben
+        </a>
+        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'USER'}" th:href="@{/favorites}">
+            Meine Favoriten
         </a>
     </section>
 

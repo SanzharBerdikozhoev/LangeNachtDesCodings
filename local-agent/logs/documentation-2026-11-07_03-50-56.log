@@ -1,0 +1,620 @@
+Documentation update started: 2026-11-07T03:50:56.903559
+[2026-11-07T02:50:56Z] Documentation updater started.
+[2026-11-07T02:50:56Z] Repository: git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git
+[2026-11-07T02:50:56Z] Main branch: main
+[2026-11-07T02:50:56Z] Documentation: PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42
+[2026-11-07T02:50:56Z] Cloning repository...
+[2026-11-07T02:51:00Z] Current main SHA: bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121
+[2026-11-07T02:51:00Z] Change base: a5369a838157920343af8b90641f5cb8cfcb6549
+[2026-11-07T02:51:00Z] Starting AI agent...
+[0m
+> build · iceman-free
+[0m→ [0mRead AGENT.md 
+[0m✱ [0mGlob ".agents/skills/**/*" [90m0 matches[0m
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo branch --show-current
+main
+> build · iceman-free
+[0m$ [0mfind /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo -name "AGENT.md" -o -name "*SKILLS*" -o -name "GITHUB*" -o -name "ARCHITECTURE*" 2>&1 | head -40
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/AGENT.md
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/.agents/skills/github/GITHUB_SKILLS.md
+[0m$ [0mls /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/
+AGENT.md
+local-agent
+PizzaProject_Tashbaev_Kurbanov_Berdikozhoev
+README.md
+update-arc42-docs.sh
+update-arc42.yml
+> build · iceman-free
+[0m→ [0mRead .agents/skills/github/GITHUB_SKILLS.md 
+[0m→ [0mRead .agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md 
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo log --oneline a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 2>&1 | head -30
+bacd1a0 Merge remote-tracking branch 'refs/remotes/origin/main'
+beac205 zaebalo pidets
+f3f2718 docs(arc42): document payment account and deposit flow
+12235a2 pohuy
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --name-status a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/
+D	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/test-results/test/binary/output.bin
+D	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/test-results/test/binary/output.bin.idx
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/05-building-block-view.md
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/08-concepts.md
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+[0m$ [0mls /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/ 2>&1 | head -20
+01-introduction-and-goals.md
+02-architecture-constraints.md
+03-system-scope-and-context.md
+04-solution-strategy.md
+05-building-block-view.md
+06-runtime-view.md
+07-deployment-view.md
+08-concepts.md
+09-architecture-decisions.md
+10-quality-requirements.md
+11-risks-and-technical-debt.md
+12-glossary.md
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --stat a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/
+.../build/test-results/test/binary/output.bin      |   0
+ .../build/test-results/test/binary/output.bin.idx  | Bin 1 -> 0 bytes
+ .../docs/arc42/05-building-block-view.md           |   2 +-
+ .../docs/arc42/06-runtime-view.md                  |  10 +++++++++
+ .../docs/arc42/08-concepts.md                      |   4 +++-
+ .../eva/payment/boundary/PaymentController.java    |  25 ++++++++++++++++++++-
+ .../main/resources/templates/payment/account.html  |  22 ++++++++++++++++++
+ .../main/resources/templates/pizza/pizza-menu.html |   3 +++
+ 8 files changed, 63 insertions(+), 3 deletions(-)
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java
+index e9269bb..778e438 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java
+@@ -1,6 +1,8 @@
+ package whz.pti.eva.payment.boundary;
+ 
+ import org.springframework.stereotype.Controller;
++import org.springframework.ui.Model;
++import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestMapping;
+ import org.springframework.web.bind.annotation.RequestParam;
+@@ -22,6 +24,22 @@ public class PaymentController {
+         this.paymentService = paymentService;
+     }
+ 
++    @GetMapping("/account")
++    public String showAccount(Model model, RedirectAttributes redirectAttributes) {
++        Optional<User> currentUser = CurrentUserUtils.getUser();
++        if (currentUser.isEmpty()) {
++            redirectAttributes.addFlashAttribute("error", "Bitte loggen Sie sich ein, um Ihr Konto zu sehen.");
++            return "redirect:/login?redirect=/payment/account";
++        }
++
++        try {
++            model.addAttribute("balance", paymentService.getBalance(currentUser.get().getLoginName()));
++        } catch (RuntimeException e) {
++            model.addAttribute("error", "Kontostand konnte momentan nicht geladen werden.");
++        }
++        return "payment/account";
++    }
++
+     @PostMapping("/deposit")
+     public String doDeposit(@RequestParam double amount, RedirectAttributes redirectAttributes) {
+         Optional<User> currentUser = CurrentUserUtils.getUser();
+@@ -30,6 +48,11 @@ public class PaymentController {
+             return "redirect:/login?redirect=/ordered";
+         }
+ 
++        if (!Double.isFinite(amount) || amount <= 0) {
++            redirectAttributes.addFlashAttribute("error", "Der Einzahlungsbetrag muss größer als 0 sein.");
++            return "redirect:/payment/account";
++        }
++
+         try {
+             paymentService.deposit(currentUser.get().getLoginName(), amount);
+             redirectAttributes.addFlashAttribute("success", "Einzahlung erfolgreich!");
+@@ -37,6 +60,6 @@ public class PaymentController {
+             redirectAttributes.addFlashAttribute("error", e.getMessage());
+         }
+ 
+-        return "redirect:/";
++        return "redirect:/payment/account";
+     }
+ }
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+index 75579d1..7c16403 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+@@ -86,6 +86,9 @@
+         <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" th:href="@{'/customers'}">
+             zum Kunden-Verwaltung
+         </a>
++        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'USER'}" th:href="@{/payment/account}">
++            Zahlungskonto und Guthaben
++        </a>
+     </section>
+ 
+ </main>
+[0m$ [0mcat /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/05-building-block-view.md
+# 5. Building Block View
+
+## 5.1 Level 1: application
+
+The Spring Boot application starts from `PizzaProjectTashbaevKurbanovBerdikozhoevApplication`. Its implementation is organized as a modular monolith in one Gradle project and one application package tree.
+
+## 5.2 Level 2: feature modules
+
+| Module | Responsibility evidenced by source |
+|---|---|
+| `menu` | Pizza entity/repository, menu service/controller, and pizza seed data. |
+| `cart` | Cart and item persistence, session cart, cart service, and web controller. |
+| `ordered` | Order and order-item persistence, order service/controller, order DTOs. |
+| `customer` | Customer profile and delivery address entities, repositories, services, and controllers. |
+| `user` | User/role entities, registration/login endpoints, current-user details, and user service. |
+| `auth` | Spring Security configuration and successful-login cart merge/redirect handler. |
+| `payment` | Payment service, DTOs, controller, `BalanceControllerAdvice`, and payment/account templates. `PaymentController` serves the authenticated account view (`GET /payment/account`, `templates/payment/account.html`) and deposit action (`POST /payment/deposit`); `BalanceControllerAdvice` adds `currentUser` and payment balance to model data for authenticated requests. `PaymentServiceImpl` calls the configured external payment API for account/balance, deposit, and checkout payment operations. |
+| `common` | Shared base entity, database initialization, session utility, and domain exceptions. |
+
+Most features use `boundary` for MVC endpoints, `service` for business logic, and `domain` for entities/repositories. This is a package convention, not a separate runtime service boundary.
+
+## 5.3 Persistence model (high-level)
+
+JPA entities include `Pizza`, `Cart`, `Item`, `User`, `Customer`, `DeliveryAddress`, `Ordered`, and `OrderedItem`. `Item` references a pizza and cart; `Cart` contains items and is associated with a user identifier. `User` has a one-to-one customer relationship; customers and delivery addresses are many-to-many. An order contains order items and stores user and delivery-address identifiers. See the entity classes in each module's `domain` package for exact mappings.
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo show --name-only --format="" bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html 2>&1; echo "---"; git -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo show a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html 2>&1 | head -120
+---
+commit 12235a2d698e0c7a11544bde2468561d5c5e569d
+Author: Aidarbek4 <aidarbek.kurmankozhoev@gmail.com>
+Date:   Sat Nov 7 03:34:21 2026 +0100
+
+    pohuy
+
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html
+new file mode 100644
+index 0000000..0e9e142
+--- /dev/null
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html
+@@ -0,0 +1,22 @@
++<!DOCTYPE html>
++<html xmlns:th="http://www.thymeleaf.org" lang="de">
++<head th:replace="~{fragments/general :: general('Mein Konto')}"></head>
++<body>
++<header th:replace="~{fragments/header :: header('Mein Konto')}"></header>
++<main class="container mt-4" style="max-width: 36rem">
++    <h1 class="fs-4">Mein Zahlungskonto</h1>
++    <p th:if="${balance != null}" class="fs-5">
++        Aktuelles Guthaben: <strong th:text="${#numbers.formatDecimal(balance, 1, 2)} + ' €'"></strong>
++    </p>
++    <p th:if="${error}" class="alert alert-warning" th:text="${error}"></p>
++    <p th:if="${success}" class="alert alert-success" th:text="${success}"></p>
++    <form th:action="@{/payment/deposit}" method="post" class="d-flex gap-2">
++        <label class="visually-hidden" for="amount">Einzahlungsbetrag</label>
++        <input id="amount" class="form-control" type="number" name="amount" min="0.01" step="0.01" required placeholder="Betrag in €" />
++        <button class="btn btn-primary text-nowrap" type="submit">Guthaben aufladen</button>
++    </form>
++    <a class="btn btn-outline-secondary mt-3" th:href="@{/}">Zurück zum Menü</a>
++</main>
++<footer th:replace="~{fragments/footer}"></footer>
++</body>
++</html>
+> build · iceman-free
+[0m$ [0mcat /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+# 6. Runtime View
+
+## 6.1 Browse menu
+
+The browser requests the menu route handled by `menu/boundary/PizzaController` (`GET /`). The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. Optional `sort` (`name`, default) and `direction` (`asc`, default) parameters control in-memory ordering of the filtered list: `sort=price` uses `Pizza::getPriceMedium`, otherwise pizzas are sorted by `Pizza::getName` (case-insensitive); `direction=desc` reverses the comparator. The controller adds `pizzas`, `searchQuery`, `sort`, and `direction` to the model and returns `templates/pizza/pizza-menu.html`, where a GET form submits searches and sorting selections. The controller also loads the current user's or guest's cart as described below.
+
+## 6.2 Cart as guest and after login
+
+For an anonymous visitor, `CartServiceImpl` delegates add/update/delete and read operations to the session-scoped `SessionCart`. For authenticated users, cart changes use `CartRepository` and `ItemRepository`. `LoginSuccessHandler` calls `mergeSessionCartIntoDb` after successful authentication, then redirects to the saved login redirect or `/`.
+
+## 6.3 Checkout
+
+`OrderedController` passes selected cart item identifiers and delivery address to `OrderedServiceImpl`. The service loads the user's cart, selects requested items, computes prices from pizza size and quantity, removes the selected cart items, calls `PaymentService.doActionPay`, and saves an `Ordered` record with order items and total. The payment implementation sends an HTTP POST to the configured payment endpoint.
+
+The source shows the sequence above. It does not document distributed transaction semantics between the application database and payment API; the service is annotated `@Transactional`, but that cannot make the remote HTTP call part of a database transaction.
+
+## 6.4 Payment account and deposit
+
+For authenticated `USER` visitors, `templates/pizza/pizza-menu.html` links to `/payment/account` ("Zahlungskonto und Guthaben"). `PaymentController.showAccount` (`GET /payment/account`) requires a current user; if absent it redirects to `/login?redirect=/payment/account` with a flash error. When a user is present, it calls `PaymentService.getBalance` and renders `templates/payment/account.html`; balance-loading failures add an error message to the model.
+
+The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDeposit` requires a current user (otherwise redirects to `/login?redirect=/ordered` with a flash error), validates that the amount is finite and greater than 0 (otherwise redirects back to `/payment/account` with a flash error), then calls `PaymentService.deposit`. Successful deposits and `PaymentFailedException` outcomes are reported via flash messages and redirect to `/payment/account`.
+
+`PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
+
+## 6.5 Startup initialization
+
+## 6.4 Startup initialization
+
+`InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
+[0m$ [0mcat /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/08-concepts.md
+# 8. Concepts
+
+## Authentication and authorization
+
+`auth/SecurityConfig.java` configures form login, remember-me, logout, URL authorization, a DAO authentication provider, and a delegating password encoder. Static assets and H2 console paths are ignored by web security. URL rules distinguish anonymous/regular-user cart access, user-only order access, and admin-only pizza/customer management.
+
+## Persistence and identity
+
+JPA is used for domain persistence. Feature repositories extend Spring Data patterns. `common/domain/BaseEntity` is shared entity infrastructure. Login names are used as the user identity in cart/order service calls; the user entity has a unique non-null login name.
+
+## Session state
+
+The guest cart is represented by `SessionCart` / `SessionCartItem`; authenticated carts are database-backed. `CurrentUserUtil` and user services access current authentication context.
+
+## Validation and error handling
+
+Spring Boot validation is a dependency; form objects and a user creation validator exist. Domain-specific exceptions are in `common/exceptions`; payment balance errors also have controller advice. The exact handling varies by controller and is not unified in one documented global error model.
+
+## External payment communication
+
+`PaymentServiceImpl` uses Spring `RestClient`, JSON request bodies, and HTTP Basic credentials built from the `service.payment.plainCreds` property. The checked-in properties file contains a credential-like value; its value is intentionally not repeated here. It performs checkout payments (`POST .../payment`), account creation (`POST .../{loginName}`), balance retrieval (`GET .../{loginName}/account`), and deposits (`PATCH .../{loginName}/deposit`) against the configured `service.payment.url`. Payment and deposit response errors are translated to `PaymentFailedException` where caught.
+
+The web layer exposes payment account operations through `PaymentController` (`GET /payment/account`, `POST /payment/deposit`) and `templates/payment/account.html`. `BalanceControllerAdvice` is a `@ControllerAdvice` that adds `currentUser` and balance model attributes for authenticated requests, with a `0.0` fallback when balance retrieval fails.
+
+## Initialization
+
+`InitializeDB` provisions sample users and a profile/address; `DataInitializer` provisions pizzas if none exist. These are startup behaviors, not an independently documented production data migration strategy.
+[0m$ [0mcat /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java
+package whz.pti.eva.payment.boundary;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import whz.pti.eva.common.exceptions.PaymentFailedException;
+import whz.pti.eva.payment.service.PaymentService;
+import whz.pti.eva.user.domain.User;
+import whz.pti.eva.user.service.currentuser.CurrentUserUtils;
+
+import java.util.Optional;
+
+@Controller
+@RequestMapping("/payment")
+public class PaymentController {
+
+    private final PaymentService paymentService;
+
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    @GetMapping("/account")
+    public String showAccount(Model model, RedirectAttributes redirectAttributes) {
+        Optional<User> currentUser = CurrentUserUtils.getUser();
+        if (currentUser.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Bitte loggen Sie sich ein, um Ihr Konto zu sehen.");
+            return "redirect:/login?redirect=/payment/account";
+        }
+
+        try {
+            model.addAttribute("balance", paymentService.getBalance(currentUser.get().getLoginName()));
+        } catch (RuntimeException e) {
+            model.addAttribute("error", "Kontostand konnte momentan nicht geladen werden.");
+        }
+        return "payment/account";
+    }
+
+    @PostMapping("/deposit")
+    public String doDeposit(@RequestParam double amount, RedirectAttributes redirectAttributes) {
+        Optional<User> currentUser = CurrentUserUtils.getUser();
+        if (currentUser.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Bitte loggen Sie sich ein, um das Geld einzuzahlen.");
+            return "redirect:/login?redirect=/ordered";
+        }
+
+        if (!Double.isFinite(amount) || amount <= 0) {
+            redirectAttributes.addFlashAttribute("error", "Der Einzahlungsbetrag muss größer als 0 sein.");
+            return "redirect:/payment/account";
+        }
+
+        try {
+            paymentService.deposit(currentUser.get().getLoginName(), amount);
+            redirectAttributes.addFlashAttribute("success", "Einzahlung erfolgreich!");
+        } catch (PaymentFailedException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return "redirect:/payment/account";
+    }
+}
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+index 606d7c3..5b62324 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+@@ -14,6 +14,16 @@ For an anonymous visitor, `CartServiceImpl` delegates add/update/delete and read
+ 
+ The source shows the sequence above. It does not document distributed transaction semantics between the application database and payment API; the service is annotated `@Transactional`, but that cannot make the remote HTTP call part of a database transaction.
+ 
++## 6.4 Payment account and deposit
++
++For authenticated `USER` visitors, `templates/pizza/pizza-menu.html` links to `/payment/account` ("Zahlungskonto und Guthaben"). `PaymentController.showAccount` (`GET /payment/account`) requires a current user; if absent it redirects to `/login?redirect=/payment/account` with a flash error. When a user is present, it calls `PaymentService.getBalance` and renders `templates/payment/account.html`; balance-loading failures add an error message to the model.
++
++The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDeposit` requires a current user (otherwise redirects to `/login?redirect=/ordered` with a flash error), validates that the amount is finite and greater than 0 (otherwise redirects back to `/payment/account` with a flash error), then calls `PaymentService.deposit`. Successful deposits and `PaymentFailedException` outcomes are reported via flash messages and redirect to `/payment/account`.
++
++`PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
++
++## 6.5 Startup initialization
++
+ ## 6.4 Startup initialization
+ 
+ `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
+[0m$ [0mgrep -n -B2 -A20 "## 6.4\|## 6.5" /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+15-The source shows the sequence above. It does not document distributed transaction semantics between the application database and payment API; the service is annotated `@Transactional`, but that cannot make the remote HTTP call part of a database transaction.
+16-
+17:## 6.4 Payment account and deposit
+18-
+19-For authenticated `USER` visitors, `templates/pizza/pizza-menu.html` links to `/payment/account` ("Zahlungskonto und Guthaben"). `PaymentController.showAccount` (`GET /payment/account`) requires a current user; if absent it redirects to `/login?redirect=/payment/account` with a flash error. When a user is present, it calls `PaymentService.getBalance` and renders `templates/payment/account.html`; balance-loading failures add an error message to the model.
+20-
+21-The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDeposit` requires a current user (otherwise redirects to `/login?redirect=/ordered` with a flash error), validates that the amount is finite and greater than 0 (otherwise redirects back to `/payment/account` with a flash error), then calls `PaymentService.deposit`. Successful deposits and `PaymentFailedException` outcomes are reported via flash messages and redirect to `/payment/account`.
+22-
+23-`PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
+24-
+25:## 6.5 Startup initialization
+26-
+27:## 6.4 Startup initialization
+28-
+29-`InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
+[0m$ [0mgrep -n "payment\|Payment\|Guthaben\|Konto\|deposit\|account" /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/09-architecture-decisions.md /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/12-glossary.md
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md:5:The implemented system supports pizza shopping and ordering. Browser-facing controllers render server-side views. The system also calls a separately addressed payment service; the provider and its operational ownership are not identified in this repository.
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md:9:Pizza application -- HTTP payment/account requests --> Payment API
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md:13:The diagram describes code-level interactions, not a deployment topology. `payment/service/PaymentServiceImpl.java` constructs payment API URLs from `service.payment.url`. `application.properties` sets that URL to `http://localhost:9090/users/`.
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md:20:- Outbound interface: HTTP via Spring `RestClient` to the payment API.
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03-system-scope-and-context.md:22:No API contract for external consumers, payment-service implementation, or production datasource configuration is included in the project files inspected.
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/09-architecture-decisions.md:11:| External payment API called synchronously over HTTP | `PaymentServiceImpl` | Provider SLA, retry, timeout, and failure policy are undocumented. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md:7:| Payment credentials are configured as plain text | `src/main/resources/application.properties` defines `service.payment.plainCreds` with a credential-like value. The value is not reproduced. Confirm it is not an active credential and use deployment-appropriate secret injection. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md:9:| Sample identities/passwords seeded | `common/db/InitializeDB.java` seeds admin/user accounts with literal passwords (then encoded). Confirm these credentials and initialization behavior are development-only or otherwise secured. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md:10:| Payment/database consistency | `OrderedServiceImpl` removes cart items before payment succeeds, calls the remote payment API, then saves the order. Database rollback cannot undo a successful remote payment; failure/retry/reconciliation behavior is not documented. Validate transactional behavior and recovery requirements. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/11-risks-and-technical-debt.md:11:| Payment client resilience not evident | `PaymentServiceImpl` creates a default `RestClient`; no explicit timeout, retry, circuit breaker, or idempotency handling is visible in this class. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/12-glossary.md:13:| User / role | Login account and its `Role` value used by Spring Security authorization. |
+/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/12-glossary.md:14:| Payment API | External HTTP service called by `PaymentServiceImpl`; its implementation/provider is not part of this repository. |
+> build · iceman-free
+[0m← [0mEdit PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+Index: PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+===================================================================
+--- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
++++ PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+@@ -23,7 +23,5 @@
+ `PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
+ 
+ ## 6.5 Startup initialization
+ 
+-## 6.4 Startup initialization
+-
+ `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
+
+> build · iceman-free
+[0m$ [0mdate -u +%Y%m%dT%H%M%SZ
+20261107T025245Z
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo status --short
+M PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo fetch origin 2>&1 | tail -5
+(no output)
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md > /tmp/opencode/arc42-06-fix.patch && echo ok
+ok
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo log --oneline -1 origin/main 2>&1 | head -1
+bacd1a0 Merge remote-tracking branch 'refs/remotes/origin/main'
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo restore -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md && git -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo switch -c docs/arc42-auto-20261107T025245Z origin/main 2>&1
+Переключились на новую ветку «docs/arc42-auto-20261107T025245Z»
+branch 'docs/arc42-auto-20261107T025245Z' set up to track 'origin/main'.
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo branch --show-current
+docs/arc42-auto-20261107T025245Z
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git apply /tmp/opencode/arc42-06-fix.patch 2>&1; echo "---$?---"
+---0---
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --check -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md 2>&1; echo "---"
+---
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --cached --stat
+(no output)
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo add PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md && git -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --cached --check && echo OK
+OK
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --cached --name-only
+PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo status --short
+M  PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo diff --cached -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md | head -60
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+index 5b62324..75e5a0c 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+@@ -24,6 +24,4 @@ The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDepo
+ 
+ ## 6.5 Startup initialization
+ 
+-## 6.4 Startup initialization
+-
+ `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo branch --show-current
+docs/arc42-auto-20261107T025245Z
+> build · iceman-free
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo commit -m "docs(arc42): fix duplicate startup heading in runtime view" 2>&1
+[docs/arc42-auto-20261107T025245Z 453af31] docs(arc42): fix duplicate startup heading in runtime view
+ 1 file changed, 2 deletions(-)
+[0m$ [0mgit -C /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo push -u origin docs/arc42-auto-20261107T025245Z 2>&1
+remote: 
+remote: Create a pull request for 'docs/arc42-auto-20261107T025245Z' on GitHub by visiting:        
+remote:      https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/new/docs/arc42-auto-20261107T025245Z        
+remote: 
+To github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git
+ * [new branch]      docs/arc42-auto-20261107T025245Z -> docs/arc42-auto-20261107T025245Z
+branch 'docs/arc42-auto-20261107T025245Z' set up to track 'origin/docs/arc42-auto-20261107T025245Z'.
+> build · iceman-free
+[0m$ [0mcat > /tmp/opencode/pr-body.md << 'EOF'
+## Summary
+Reviews architecture-relevant changes in `a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121` (PizzaProject scope). The range added a payment account/deposit UI flow (`PaymentController` `GET /payment/account`, `POST /payment/deposit` with validation/redirects, `templates/payment/account.html`, menu link in `templates/pizza/pizza-menu.html`). arc42 chapters 05, 06, and 08 were already updated in the range; this PR fixes a documentation defect introduced there.
+
+## Relevant source commits/files inspected
+- `git log/diff` over `a5369a8..bacd1a0 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`
+- Code evidence: `src/main/java/whz/pti/eva/payment/boundary/PaymentController.java`, `src/main/resources/templates/payment/account.html`, `src/main/resources/templates/pizza/pizza-menu.html`
+- Docs reviewed: `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03,05,06,08,09,11,12`
+
+## Arc42 chapters updated
+- `06-runtime-view.md`: removed a duplicated/misnumbered startup heading left after adding the payment account/deposit runtime scenario in the reviewed range.
+
+## Architectural facts (evidence)
+- Authenticated account view and deposit actions are handled by `payment/boundary/PaymentController` (`GET /payment/account`, `POST /payment/deposit`) with flash/model error handling and redirects as implemented; UI is `templates/payment/account.html` and `templates/pizza/pizza-menu.html` links `USER` visitors to `/payment/account`.
+
+## Checks performed / not performed
+- `git diff --check` (clean) on staged docs change.
+- No application build/tests run (documentation-only fix; test/build status not claimed).
+
+## Open questions / uncertainty
+- Production deployment, external payment API ownership/SLA, and distributed transaction semantics remain unspecified in repository (existing arc42 notes retained).
+EOF
+cat /tmp/opencode/pr-body.md
+## Summary
+Reviews architecture-relevant changes in `a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121` (PizzaProject scope). The range added a payment account/deposit UI flow (`PaymentController` `GET /payment/account`, `POST /payment/deposit` with validation/redirects, `templates/payment/account.html`, menu link in `templates/pizza/pizza-menu.html`). arc42 chapters 05, 06, and 08 were already updated in the range; this PR fixes a documentation defect introduced there.
+
+## Relevant source commits/files inspected
+- `git log/diff` over `a5369a8..bacd1a0 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`
+- Code evidence: `src/main/java/whz/pti/eva/payment/boundary/PaymentController.java`, `src/main/resources/templates/payment/account.html`, `src/main/resources/templates/pizza/pizza-menu.html`
+- Docs reviewed: `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03,05,06,08,09,11,12`
+
+## Arc42 chapters updated
+- `06-runtime-view.md`: removed a duplicated/misnumbered startup heading left after adding the payment account/deposit runtime scenario in the reviewed range.
+
+## Architectural facts (evidence)
+- Authenticated account view and deposit actions are handled by `payment/boundary/PaymentController` (`GET /payment/account`, `POST /payment/deposit`) with flash/model error handling and redirects as implemented; UI is `templates/payment/account.html` and `templates/pizza/pizza-menu.html` links `USER` visitors to `/payment/account`.
+
+## Checks performed / not performed
+- `git diff --check` (clean) on staged docs change.
+- No application build/tests run (documentation-only fix; test/build status not claimed).
+
+## Open questions / uncertainty
+- Production deployment, external payment API ownership/SLA, and distributed transaction semantics remain unspecified in repository (existing arc42 notes retained).
+[0m$ [0mgh auth status 2>&1 | head -15
+github.fh-zwickau.de
+  X Failed to log in to github.fh-zwickau.de account aik25p9v (keyring)
+  - Active account: true
+  - The token in keyring is invalid.
+  - To re-authenticate, run: gh auth refresh -h github.fh-zwickau.de
+  - To forget about this account, run: gh auth logout -h github.fh-zwickau.de -u aik25p9v
+
+github.com
+  ✓ Logged in to github.com account Aidarbek4 (keyring)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && gh pr create --base main --head docs/arc42-auto-20261107T025245Z --title "docs(arc42): fix runtime view startup heading" --body-file /tmp/opencode/pr-body.md 2>&1
+pull request create failed: GraphQL: No commits between main and docs/arc42-auto-20261107T025245Z (createPullRequest)
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git log --oneline -3 docs/arc42-auto-20261107T025245Z && echo "---" && git log --oneline -2 origin/main && echo "---" && git show-ref --heads main docs/arc42-auto-20261107T025245Z
+453af31 docs(arc42): fix duplicate startup heading in runtime view
+bacd1a0 Merge remote-tracking branch 'refs/remotes/origin/main'
+beac205 zaebalo pidets
+---
+bacd1a0 Merge remote-tracking branch 'refs/remotes/origin/main'
+beac205 zaebalo pidets
+---
+453af3183edc68181c08c2086d7062d50e23d104 refs/heads/docs/arc42-auto-20261107T025245Z
+bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121 refs/heads/main
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && gh repo view --json nameWithOwner,defaultBranchRef 2>&1
+{"defaultBranchRef":{"name":"main"},"nameWithOwner":"SanzharBerdikozhoev/LangeNachtDesCodings"}
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git ls-remote --heads origin main docs/arc42-auto-20261107T025245Z 2>&1
+bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121	refs/heads/docs/arc42-auto-20261107T025245Z
+bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121	refs/heads/main
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git fetch origin docs/arc42-auto-20261107T025245Z 2>&1 | tail -2
+Из github.com:SanzharBerdikozhoev/LangeNachtDesCodings
+ * branch            docs/arc42-auto-20261107T025245Z -> FETCH_HEAD
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git show --name-only 453af31
+commit 453af3183edc68181c08c2086d7062d50e23d104
+Author: Aidarbek4 <aidarbek.kurmankozhoev@gmail.com>
+Date:   Sat Nov 7 03:53:23 2026 +0100
+
+    docs(arc42): fix duplicate startup heading in runtime view
+
+PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git branch -vv | grep docs/arc42-auto && echo "---" && git log --oneline -1 FETCH_HEAD 2>&1
+* docs/arc42-auto-20261107T025245Z 453af31 [origin/docs/arc42-auto-20261107T025245Z: впереди 1] docs(arc42): fix duplicate startup heading in runtime view
+---
+bacd1a0 Merge remote-tracking branch 'refs/remotes/origin/main'
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git ls-remote --heads origin docs/arc42-auto-20261107T025245Z main 2>&1
+bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121	refs/heads/docs/arc42-auto-20261107T025245Z
+bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121	refs/heads/main
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git push -u origin docs/arc42-auto-20261107T025245Z 2>&1
+To github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git
+   bacd1a0..453af31  docs/arc42-auto-20261107T025245Z -> docs/arc42-auto-20261107T025245Z
+branch 'docs/arc42-auto-20261107T025245Z' set up to track 'origin/docs/arc42-auto-20261107T025245Z'.
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && git remote -v
+origin	git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git (fetch)
+origin	git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git (push)
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && GIT_TRACE=0 git push -u origin 453af31:refs/heads/docs/arc42-auto-20261107T025245Z 2>&1 | tail -10
+Everything up-to-date
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && sleep 1 && git ls-remote origin refs/heads/docs/arc42-auto-20261107T025245Z 2>&1
+453af3183edc68181c08c2086d7062d50e23d104	refs/heads/docs/arc42-auto-20261107T025245Z
+> build · iceman-free
+[0m$ [0mcd /home/foggy/Рабочий\ стол/arc42-doc-agent/run.0Xnqh5/repo && gh pr create --base main --head docs/arc42-auto-20261107T025245Z --title "docs(arc42): fix runtime view startup heading" --body-file /tmp/opencode/pr-body.md 2>&1
+https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/3
+> build · iceman-free
+## Scope & inputs reviewed
+- **Repository/branch (read-only context):** `/home/foggy/Рабочий стол/arc42-doc-agent/run.0Xnqh5/repo`, `main` at `bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121` (origin/main same in clone).
+- **Target docs (only modified path):** `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/`
+- **Change range:** `a5369a838157920343af8b90641f5cb8cfcb6549..bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121`
+- **Instructions read:** `AGENT.md`, `.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md`, `.agents/skills/github/GITHUB_SKILLS.md`
+
+## 1) Change review (PizzaProject scope)
+Commands run:
+- `git log --oneline a5369a8..bacd1a0` (showed merge + `f3f2718 docs(arc42): document payment account and deposit flow` + two non-descriptive commits)
+- `git diff --name-status/stat a5369a8..bacd1a0 -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`
+
+Architecture-relevant code/template changes in range (evidence):
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/payment/boundary/PaymentController.java` — added `GET /payment/account` (`showAccount`), deposit amount validation (`finite && > 0`), auth/redirect/flash handling, and redirect to `/payment/account` after deposit.
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/payment/account.html` (added) — account/balance display and deposit form posting to `/payment/deposit`.
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html` — added `USER`-role link to `/payment/account` ("Zahlungskonto und Guthaben").
+
+Ignored as tooling/unrelated/build artifacts: deleted `build/test-results/test/binary/*` in range; no bot automation/agent-instruction files documented.
+
+## 2) Impact assessment
+The range affects PizzaProject payment/account UI/runtime behavior and arc42 docs 05/06/08 were already updated in `f3f2718`. I verified current docs against the final code state and found one stale/inaccurate documentation artifact introduced in the range’s 06 update (duplicate/misnumbered startup heading). No other chapters required changes based on verified evidence.
+
+## 3) Current docs reviewed
+`PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/03, 05, 06, 08, 09, 11, 12` (and chapter structure confirmed via directory listing). 05/08 accurately reflect the payment account/controller/template behavior evidenced above; 03/09/11/12 already contain payment-related statements consistent with repository evidence and were not stale for this range.
+
+## 4) Documentation update (only stale content changed)
+**Updated chapter:** `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md`
+- **Why:** Fixed a duplicated/misnumbered startup section left after the payment account/deposit scenario was added in the reviewed range (`## 6.5 Startup initialization` followed by a duplicate `## 6.4 Startup initialization`). The corrected section is now a single `## 6.5 Startup initialization` describing `InitializeDB`/`menu/utils/DataInitializer` behavior, consistent with existing evidence.
+- **Evidence paths:** `docs/arc42/06-runtime-view.md` (range diff showed the defect); startup behavior statements remain supported by `common/db/InitializeDB.java` and `menu/utils/DataInitializer.java` naming/behavior as previously documented (no new behavior invented).
+
+No files outside `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/` were modified.
+
+## 5) Publication (performed because documentation changed)
+- Created/switched to docs branch from `origin/main` **before staging/committing**: `docs/arc42-auto-20261107T025245Z` (UTC). Verified with `git branch --show-current` before staging and **again immediately before commit**.
+- Staged only: `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md`.
+- Commit (on docs branch, not main): `453af318` `docs(arc42): fix duplicate startup heading in runtime view`.
+- Push (explicit): `git push -u origin docs/arc42-auto-20261107T025245Z` **succeeded** (verified with `git ls-remote origin refs/heads/docs/arc42-auto-20261107T025245Z` showing `453af318...`; `refs/heads/main` remained `bacd1a067...`).
+- PR created with authenticated `gh` (github.com account active): **succeeded**.
+
+## Checks performed / not performed
+- Performed: `git diff --check` on staged docs change (clean); reviewed cached diff; verified branch before staging/commit; verified remote refs after push; verified `main` ref unchanged on remote.
+- Not performed: application build/tests, runtime verification (documentation-only change; **no test/build success claimed**).
+
+## Open questions / assumptions (unchanged, evidence-backed)
+- External payment API provider/ownership/SLA, production deployment topology, and distributed transaction/consistency semantics between order persistence and remote payment remain **not specified in repository** (existing arc42 notes retained in 03/06/08/09/11).
+- Checked-in payment credential-like configuration exists in properties; value not reproduced (existing risk note retained).
+
+## Pull request
+- **PR URL:** https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/3 (base `main`, head `docs/arc42-auto-20261107T025245Z`) — **not merged**.
+[2026-11-07T02:55:07Z] AI agent finished successfully.
+[2026-11-07T02:55:08Z] Guard passed: remote main untouched.
+[2026-11-07T02:55:08Z] Checkpoint updated: bacd1a0672f2d3fb6d5b88f77362bdbd9a11d121
+[2026-11-07T02:55:08Z] Documentation update run completed.
+
+Script exit code: 0

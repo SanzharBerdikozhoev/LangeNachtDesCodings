@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head th:replace="~{fragments/general :: general('Meine Favoriten')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header('Meine Favoriten')}"></header>
+<main class="container mt-4" style="max-width: 48rem">
+    <h1 class="fs-4">Meine Favoriten</h1>
+    <p th:if="${#lists.isEmpty(favorites)}" class="alert alert-info">Noch keine Lieblingspizzen gespeichert.</p>
+    <div th:each="favorite : ${favorites}" class="d-flex justify-content-between align-items-center border-bottom py-2">
+        <span th:text="${favorite.pizza.name}">Pizza</span>
+        <div class="d-flex align-items-center gap-3">
+            <span th:text="${favorite.pizza.priceMedium} + ' €'"></span>
+            <form th:action="@{|/favorites/${favorite.pizza.id}/remove|}" method="post">
+                <button class="btn btn-outline-danger btn-sm" type="submit">Entfernen</button>
+            </form>
+        </div>
+    </div>
+    <a class="btn btn-outline-secondary mt-3" th:href="@{/}">Zum Menü</a>
+</main>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

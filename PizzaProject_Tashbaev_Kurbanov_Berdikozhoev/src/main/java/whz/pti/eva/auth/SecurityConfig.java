@@ -63,6 +63,7 @@ class SecurityConfig {
                                 .requestMatchers("/", "/login", "/register", "/css/**").permitAll()
                                 .requestMatchers("/cart/**").access(new WebExpressionAuthorizationManager("isAnonymous() or (hasAuthority('USER') and !hasAuthority('ADMIN'))"))
                                 .requestMatchers("/ordered/**").hasAuthority("USER")
+                                .requestMatchers("/favorites/**").hasAuthority("USER")
                                 .requestMatchers("/pizzas/**", "/customers", "/customers/create", "/customers/*/block").hasAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated())
