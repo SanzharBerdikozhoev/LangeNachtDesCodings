@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head th:replace="~{fragments/general :: general('Mein Konto')}"></head>
+<body>
+<header th:replace="~{fragments/header :: header('Mein Konto')}"></header>
+<main class="container mt-4" style="max-width: 36rem">
+    <h1 class="fs-4">Mein Zahlungskonto</h1>
+    <p th:if="${balance != null}" class="fs-5">
+        Aktuelles Guthaben: <strong th:text="${#numbers.formatDecimal(balance, 1, 2)} + ' €'"></strong>
+    </p>
+    <p th:if="${error}" class="alert alert-warning" th:text="${error}"></p>
+    <p th:if="${success}" class="alert alert-success" th:text="${success}"></p>
+    <form th:action="@{/payment/deposit}" method="post" class="d-flex gap-2">
+        <label class="visually-hidden" for="amount">Einzahlungsbetrag</label>
+        <input id="amount" class="form-control" type="number" name="amount" min="0.01" step="0.01" required placeholder="Betrag in €" />
+        <button class="btn btn-primary text-nowrap" type="submit">Guthaben aufladen</button>
+    </form>
+    <a class="btn btn-outline-secondary mt-3" th:href="@{/}">Zurück zum Menü</a>
+</main>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

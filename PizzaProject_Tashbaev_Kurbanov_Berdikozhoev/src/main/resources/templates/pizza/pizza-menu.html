@@ -86,6 +86,9 @@
         <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" th:href="@{'/customers'}">
             zum Kunden-Verwaltung
         </a>
+        <a class="btn btn-outline-tertiary w-100" th:if="${currentUser != null && currentUser.role.name() == 'USER'}" th:href="@{/payment/account}">
+            Zahlungskonto und Guthaben
+        </a>
     </section>
 
 </main>
