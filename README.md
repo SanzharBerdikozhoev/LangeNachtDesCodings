@@ -1,65 +1,90 @@
-# PizzaProject — AI Arc42 Documentation Agent Kit
+# Arc42 Documentation Bot (monorepo scenario)
 
-This kit was prepared for the `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev` Spring Boot subproject in the uploaded archive. It deliberately excludes `GradesCalculator` and `MVP`.
+This repository contains both the automation bot and the documented project
+(`PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`). The bot watches **this
+repository's** `main` branch and keeps the arc42 architecture documentation of
+the PizzaProject subproject in sync with its code.
+
+> Alternative scenario: a separate bot repository watching a separate project
+> repository — see the `fix/reduce-prompt-folders` branch.
+
+## How it works
+
+1. Someone pushes to `main` of this repository.
+2. GitHub delivers a signed `push` webhook to the FastAPI server (`local-agent/main.py`).
+3. The server verifies the signature and checks that the event is a push to `main`, then schedules a background task.
+4. `update-arc42-docs.sh` clones this repository into a temporary directory and determines the change range since the previous successful run.
+5. The AI agent (OpenCode by default) runs inside the clone. Following the workflow in `AGENT.md` it:
+   1. reviews the changes (`git diff` / `git log`),
+   2. assesses the impact on the PizzaProject architecture documentation,
+   3. reads the current arc42 chapters,
+   4. updates only the stale chapters,
+   5. creates a `docs/arc42-auto-*` branch, commits, and pushes it,
+   6. opens a pull request (never merges),
+   7. reports the result.
+6. The script verifies that the remote `main` was not touched by the agent and saves a checkpoint (last processed main SHA). The temporary clone is removed.
+7. A human reviews and merges the pull request.
 
 ## Contents
 
-- `AGENT.md` — project overview, structure, source-of-truth rules, agent workflow
-- `GITHUB_SKILLS.md` — repository reading, history, branches, commits, PR rules
-- `ARCHITECTURE_SKILLS.md` — the arc42 12-chapter standard and update criteria
-- `update-arc42-docs.sh` — polling runner that creates a disposable clone, invokes an AI CLI, and cleans up
-- `README.md` — setup notes
+- `local-agent/` — FastAPI webhook server (`main.py`)
+- `update-arc42-docs.sh` — one-shot update runner (triggered by the webhook, or manually)
+- `update-arc42.yml` — legacy polling runner (alternative mode, superseded by the webhook)
+- `AGENT.md`, `.agents/skills/` — agent instructions and skills (read by the agent inside its clone)
+- `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/` — the documented project, docs in `docs/arc42/`
 
-## Recommended repository placement
+## Setup
 
-Put the three instruction Markdown files in the PizzaProject repository root. Put generated chapter files in `docs/arc42/`. Place the shell script in a separate automation repository or on a trusted runner; avoid adding a polling daemon to the application runtime itself.
-
-Expected docs tree:
-
-```text
-PizzaProject/
-├── AGENT.md
-├── GITHUB_SKILLS.md
-├── ARCHITECTURE_SKILLS.md
-├── docs/
-│   └── arc42/
-│       ├── 01-introduction-and-goals.md
-│       ├── 02-architecture-constraints.md
-│       ├── 03-system-scope-and-context.md
-│       ├── 04-solution-strategy.md
-│       ├── 05-building-block-view.md
-│       ├── 06-runtime-view.md
-│       ├── 07-deployment-view.md
-│       ├── 08-concepts.md
-│       ├── 09-architecture-decisions.md
-│       ├── 10-quality-requirements.md
-│       ├── 11-risks-and-technical-debt.md
-│       └── 12-glossary.md
-└── ...
-```
-
-## Runner setup
-
-The runner requires `git`, the chosen AI CLI, and optionally `gh`. The clone URL and command are environment-specific:
+### 1. Install
 
 ```bash
-export REPO_URL="https://github.com/OWNER/REPOSITORY.git"
-export WORKDIR_ROOT="$HOME/.cache/arc42-doc-agent"
-export AGENT_CMD="claude -p"
-export POLL_SECONDS=300
-chmod +x update-arc42-docs.sh
-./update-arc42-docs.sh
+python3 -m venv local-agent/venv
+local-agent/venv/bin/pip install -r local-agent/requirements.txt
 ```
 
-The configured agent command is called with the complete prompt as its final argument. Different CLIs have different prompt flags; adapt `run_agent()` for your tool. For example, Claude Code, OpenCode, and pi do not all share a universal invocation format.
+The runner also needs `git`, `bash`, the AI CLI (`opencode` by default,
+configurable via `AGENT_CMD`), and for automatic PR creation `gh`
+authenticated with a token that can read the repository, push branches, and
+create pull requests. `flock` is optional — without it (e.g. on macOS) the
+script falls back to a portable `mkdir`+pid lock. Do **not** grant merge or
+force-push permissions.
 
-Use a GitHub token with minimum permissions needed to read the repository, push a branch, and create a pull request. Keep the token outside the repository (environment/secret manager). Do not provide merge or force-push permissions.
+### 2. Configure the webhook secret
 
-## Important design notes
+```bash
+cp local-agent/.env.example local-agent/.env   # or create local-agent/.env
+# set GITHUB_WEBHOOK_SECRET to any random string
+```
 
-- The script is a polling process, not a GitHub webhook. It checks `main` every `POLL_SECONDS`.
-- It records a checkpoint after a successful agent invocation, so failures retry the same change range.
-- Documentation changes are pushed to a new branch and PR; `main` is never changed directly.
+### 3. Start the server
+
+```bash
+cd local-agent
+venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+### 4. Create the webhook
+
+In this repository on GitHub: *Settings → Webhooks → Add webhook*.
+
+- Payload URL: `https://<your-public-url>/github-webhook` (tunnel/port-forward as needed)
+- Content type: `application/json`
+- Secret: the same value as `GITHUB_WEBHOOK_SECRET`
+- Events: *Only select events* → `push`
+
+### Manual trigger
+
+The pipeline can be run without the webhook:
+
+```bash
+bash update-arc42-docs.sh
+```
+
+## Design notes
+
+- One webhook push triggers one script run; concurrent runs are blocked by a lock in the script and a task lock in the server.
+- The checkpoint (last processed main SHA) is stored under `~/.local/state/arc42-doc-agent/`. On agent failure the checkpoint is not updated, so the same change range is retried on the next push.
+- Documentation changes always land on a `docs/arc42-auto-*` branch and a pull request; `main` is never modified directly. After every run the script re-fetches `origin/main` and fails if it moved.
+- No infinite loop: the webhook only reacts to pushes on `main`; the agent pushes documentation branches only. When a docs PR is merged, the next run reviews documentation-only changes and reports "no update needed".
 - Human review and merge remain required.
 - The temporary clone is deleted after each run.
-- This is a starter implementation. For production, prefer a GitHub Actions workflow triggered by `push` to `main` or a scheduled runner with isolated credentials, logs, timeout, and concurrency controls.
