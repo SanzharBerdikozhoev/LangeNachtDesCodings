@@ -14,6 +14,16 @@ For an anonymous visitor, `CartServiceImpl` delegates add/update/delete and read
 
 The source shows the sequence above. It does not document distributed transaction semantics between the application database and payment API; the service is annotated `@Transactional`, but that cannot make the remote HTTP call part of a database transaction.
 
+## 6.4 Payment account and deposit
+
+For authenticated `USER` visitors, `templates/pizza/pizza-menu.html` links to `/payment/account` ("Zahlungskonto und Guthaben"). `PaymentController.showAccount` (`GET /payment/account`) requires a current user; if absent it redirects to `/login?redirect=/payment/account` with a flash error. When a user is present, it calls `PaymentService.getBalance` and renders `templates/payment/account.html`; balance-loading failures add an error message to the model.
+
+The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDeposit` requires a current user (otherwise redirects to `/login?redirect=/ordered` with a flash error), validates that the amount is finite and greater than 0 (otherwise redirects back to `/payment/account` with a flash error), then calls `PaymentService.deposit`. Successful deposits and `PaymentFailedException` outcomes are reported via flash messages and redirect to `/payment/account`.
+
+`PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
+
+## 6.5 Startup initialization
+
 ## 6.4 Startup initialization
 
 `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
