@@ -1,0 +1,267 @@
+Documentation update started: 2026-11-07T02:56:23.210572
+[2026-11-07T01:56:23Z] Documentation updater started.
+[2026-11-07T01:56:23Z] Repository: git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git
+[2026-11-07T01:56:23Z] Main branch: main
+[2026-11-07T01:56:23Z] Documentation: PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42
+[2026-11-07T01:56:23Z] Cloning repository...
+[2026-11-07T01:56:26Z] Current main SHA: 46f0aae5d55460b7407fa13578f89dea9d7ce14e
+[2026-11-07T01:56:26Z] Change base: 1a276c7b5cead707a731756e84d58887f434249f
+[2026-11-07T01:56:26Z] Starting AI agent...
+[0m
+> build · iceman-free
+[0m✱ [0mGlob ".agents/skills/**/*" [90m0 matches[0m
+[0m→ [0mRead AGENT.md 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo log --oneline -5
+46f0aae Add sorting for pizzas
+0c46876 Remove sorting for pizzas
+1a276c7 Merge pull request #1 from SanzharBerdikozhoev/feature/scenario2-monorepo
+d0ab98c Scenario 2 (monorepo): short agent prompt, agent-driven git (branch/push/PR), portable locks, updated skills
+84ef63f Add sorting for pizzas
+[0m$ [0mls -la /tmp/arc42-doc-agent/run.czuZVV/repo
+итого 36
+drwxr-xr-x 6 foggy foggy  200 ноя  7 02:56 .
+drwx------ 3 foggy foggy   60 ноя  7 02:56 ..
+-rw-r--r-- 1 foggy foggy 8399 ноя  7 02:56 AGENT.md
+drwxr-xr-x 3 foggy foggy   60 ноя  7 02:56 .agents
+drwxr-xr-x 7 foggy foggy  260 ноя  7 02:56 .git
+drwxr-xr-x 4 foggy foggy  160 ноя  7 02:56 local-agent
+drwxr-xr-x 8 foggy foggy  260 ноя  7 02:56 PizzaProject_Tashbaev_Kurbanov_Berdikozhoev
+-rw-r--r-- 1 foggy foggy 4070 ноя  7 02:56 README.md
+-rwxr-xr-x 1 foggy foggy 9051 ноя  7 02:56 update-arc42-docs.sh
+-rw-r--r-- 1 foggy foggy 5602 ноя  7 02:56 update-arc42.yml
+> build · iceman-free
+[0m$ [0mfind /tmp/arc42-doc-agent/run.czuZVV/repo/.agents -type f
+/tmp/arc42-doc-agent/run.czuZVV/repo/.agents/skills/github/GITHUB_SKILLS.md
+/tmp/arc42-doc-agent/run.czuZVV/repo/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md
+[0m$ [0mls /tmp/arc42-doc-agent/run.czuZVV/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42 2>&1 | head -20
+01-introduction-and-goals.md
+02-architecture-constraints.md
+03-system-scope-and-context.md
+04-solution-strategy.md
+05-building-block-view.md
+06-runtime-view.md
+07-deployment-view.md
+08-concepts.md
+09-architecture-decisions.md
+10-quality-requirements.md
+11-risks-and-technical-debt.md
+12-glossary.md
+[0m$ [0mfind /tmp/arc42-doc-agent/run.czuZVV/repo -name "GITHUB_SKILLS*" -o -name "ARCHITECTURE_SKILLS*"
+/tmp/arc42-doc-agent/run.czuZVV/repo/.agents/skills/github/GITHUB_SKILLS.md
+/tmp/arc42-doc-agent/run.czuZVV/repo/.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md
+> build · iceman-free
+[0m→ [0mRead .agents/skills/github/GITHUB_SKILLS.md 
+[0m→ [0mRead .agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff --name-status 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo log --oneline 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e
+46f0aae Add sorting for pizzas
+0c46876 Remove sorting for pizzas
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+diff --git a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+index 2d31f51..40e78ec 100644
+--- a/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
++++ b/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+@@ -2,7 +2,7 @@
+ 
+ ## 6.1 Browse menu
+ 
+-The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. Optional `sort` and `direction` parameters select name or medium-price sorting and ascending or descending order. The controller returns the filtered, sorted list to `templates/pizza/pizza-menu.html`, where a GET form submits searches and sorting selections. The controller also loads the current user's or guest's cart as described below.
++The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. The controller returns the filtered list to `templates/pizza/pizza-menu.html`, where a GET form submits searches. The controller also loads the current user's or guest's cart as described below.
+ 
+ ## 6.2 Cart as guest and after login
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff --name-status 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+A	local-agent/logs/documentation-2026-11-07_01-12-31.log
+A	local-agent/logs/documentation-2026-11-07_02-38-52.log
+A	local-agent/logs/documentation-2026-11-07_02-52-21.log
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo show --name-status --format="### %H %s" 0c46876 46f0aae
+### 0c4687656f999d305ae08c277d4ae5f0f5c377e1 Remove sorting for pizzas
+
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/pizza/pizza-menu.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/boundary/PizzaController.class
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/boundary/PizzaController.class
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/pizza/pizza-menu.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/compileTransaction/stash-dir/PizzaController.class.uniqueId0
+D	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/compileTransaction/stash-dir/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.class.uniqueId1
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/previous-compilation-data.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileTestJava/previous-compilation-data.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+A	local-agent/logs/documentation-2026-11-07_01-12-31.log
+A	local-agent/logs/documentation-2026-11-07_02-38-52.log
+### 46f0aae5d55460b7407fa13578f89dea9d7ce14e Add sorting for pizzas
+
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/executionHistory/executionHistory.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/8.14.3/fileHashes/fileHashes.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/templates/pizza/pizza-menu.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/bin/main/whz/pti/eva/menu/boundary/PizzaController.class
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/classes/java/main/whz/pti/eva/menu/boundary/PizzaController.class
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/resources/main/templates/pizza/pizza-menu.html
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/compileTransaction/stash-dir/PizzaController.class.uniqueId0
+A	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/compileTransaction/stash-dir/PizzaProjectTashbaevKurbanovBerdikozhoevApplication.class.uniqueId1
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileJava/previous-compilation-data.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/build/tmp/compileTestJava/previous-compilation-data.bin
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java
+M	PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html
+A	local-agent/logs/documentation-2026-11-07_02-52-21.log
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/service/PizzaService.java 2>&1 | head -200
+(no output)
+[0m✱ [0mGrep "sort|direction|mediumPrice|orderBy" [90m7 matches[0m
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html 
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java 
+> build · iceman-free
+[0m$ [0mgrep -rn "sort\|direction\|priceMedium\|Sortier" /tmp/arc42-doc-agent/run.czuZVV/repo/PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/
+(no output)
+[0m→ [0mRead PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md 
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo show 1a276c7b5cead707a731756e84d58887f434249f:PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md | sed -n '1,12p'
+# 6. Runtime View
+
+## 6.1 Browse menu
+
+The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. Optional `sort` and `direction` parameters select name or medium-price sorting and ascending or descending order. The controller returns the filtered, sorted list to `templates/pizza/pizza-menu.html`, where a GET form submits searches and sorting selections. The controller also loads the current user's or guest's cart as described below.
+
+## 6.2 Cart as guest and after login
+
+For an anonymous visitor, `CartServiceImpl` delegates add/update/delete and read operations to the session-scoped `SessionCart`. For authenticated users, cart changes use `CartRepository` and `ItemRepository`. `LoginSuccessHandler` calls `mergeSessionCartIntoDb` after successful authentication, then redirects to the saved login redirect or `/`.
+
+## 6.3 Checkout
+> build · iceman-free
+[0m← [0mEdit PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+Index: PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+===================================================================
+--- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
++++ PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+@@ -1,9 +1,9 @@
+ # 6. Runtime View
+ 
+ ## 6.1 Browse menu
+ 
+-The browser requests the menu route handled by `menu/boundary/PizzaController`. The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. The controller returns the filtered list to `templates/pizza/pizza-menu.html`, where a GET form submits searches. The controller also loads the current user's or guest's cart as described below.
++The browser requests the menu route handled by `menu/boundary/PizzaController` (`GET /`). The optional `q` query parameter is passed to `PizzaService.searchByName`; a blank query returns all pizzas and a non-blank query retrieves names containing the trimmed query, case-insensitively. Optional `sort` (`name`, default) and `direction` (`asc`, default) parameters control in-memory ordering of the filtered list: `sort=price` uses `Pizza::getPriceMedium`, otherwise pizzas are sorted by `Pizza::getName` (case-insensitive); `direction=desc` reverses the comparator. The controller adds `pizzas`, `searchQuery`, `sort`, and `direction` to the model and returns `templates/pizza/pizza-menu.html`, where a GET form submits searches and sorting selections. The controller also loads the current user's or guest's cart as described below.
+ 
+ ## 6.2 Cart as guest and after login
+ 
+ For an anonymous visitor, `CartServiceImpl` delegates add/update/delete and read operations to the session-scoped `SessionCart`. For authenticated users, cart changes use `CartRepository` and `ItemRepository`. `LoginSuccessHandler` calls `mergeSessionCartIntoDb` after successful authentication, then redirects to the saved login redirect or `/`.
+
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo status --short --branch
+## main...origin/main
+ M PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo branch -a --list '*main*' | head -10
+* main
+  remotes/origin/main
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo log --oneline -1 origin/main 2>&1 | head -2
+46f0aae Add sorting for pizzas
+[0m$ [0mdate -u +%Y%m%dT%H%M%SZ
+20261107T015747Z
+[0m$ [0mgh auth status 2>&1 | head -15
+github.fh-zwickau.de
+  X Failed to log in to github.fh-zwickau.de account aik25p9v (keyring)
+  - Active account: true
+  - The token in keyring is invalid.
+  - To re-authenticate, run: gh auth refresh -h github.fh-zwickau.de
+  - To forget about this account, run: gh auth logout -h github.fh-zwickau.de -u aik25p9v
+
+github.com
+  ✓ Logged in to github.com account Aidarbek4 (keyring)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo remote -v | head -4
+origin	git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git (fetch)
+origin	git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git (push)
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo ls-remote --heads origin docs/arc42-auto-20261107T015747Z
+(no output)
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo fetch origin 2>&1 | tail -4
+(no output)
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff --check
+(no output)
+[0m$ [0mcd /tmp/arc42-doc-agent/run.czuZVV/repo && git switch -c docs/arc42-auto-20261107T015747Z
+Переключились на новую ветку «docs/arc42-auto-20261107T015747Z»
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo status --short
+M PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo add PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md
+(no output)
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff --cached --check
+(no output)
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo diff --cached --stat
+.../docs/arc42/06-runtime-view.md                                       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+> build · iceman-free
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo commit -m "docs(arc42): restore menu sorting in runtime view"
+[docs/arc42-auto-20261107T015747Z 39dc755] docs(arc42): restore menu sorting in runtime view
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[0m$ [0mgit -C /tmp/arc42-doc-agent/run.czuZVV/repo push -u origin HEAD 2>&1
+remote: 
+remote: Create a pull request for 'docs/arc42-auto-20261107T015747Z' on GitHub by visiting:        
+remote:      https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/new/docs/arc42-auto-20261107T015747Z        
+remote: 
+To github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git
+ * [new branch]      HEAD -> docs/arc42-auto-20261107T015747Z
+branch 'docs/arc42-auto-20261107T015747Z' set up to track 'origin/docs/arc42-auto-20261107T015747Z'.
+> build · iceman-free
+[0m← [0mWrite /tmp/pr-body.md
+Created file successfully: /tmp/pr-body.md
+> build · iceman-free
+[0m$ [0mcd /tmp/arc42-doc-agent/run.czuZVV/repo && gh pr create --base main --head "$(git branch --show-current)" --title "docs(arc42): update PizzaProject architecture documentation" --body-file /tmp/pr-body.md 2>&1
+https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/2
+> build · iceman-free
+## Workflow followed (per AGENT.md / skills)
+1. Read `AGENT.md`, `.agents/skills/github/GITHUB_SKILLS.md`, `.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md`.
+2. Reviewed changes: `git diff --name-status 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/` and `git log --oneline 1a276c7..46f0aae` (commits in range: `0c46876 Remove sorting for pizzas`, `46f0aae Add sorting for pizzas`).
+3. Assessed impact against `ARCHITECTURE_SKILLS.md` update criteria (controller route/UI interaction/runtime flow). Net source behavior in the range is unchanged, but the arc42 runtime description for menu browsing became stale relative to current implementation at HEAD.
+4. Read `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md` (and searched other arc42 chapters for related `sort`/`direction` mentions; none found). Compared base chapter state and current code.
+5. Updated only the stale chapter section; preserved arc42 structure/language/formatting.
+
+## Assessment
+- **Documentation update needed:** Yes. Section 6.1 ("Browse menu") in `06-runtime-view.md` no longer described the implemented sorting behavior, while the current code at `46f0aae` implements it.
+- **Scope respected:** Only `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/` was modified. Bot automation (`local-agent/`, scripts/workflows), agent instructions, build artifacts (`.gradle/`, `bin/`, `build/`), and application code were not modified.
+
+## Updated chapter(s)
+| Chapter | Why updated | Evidence (repository) |
+|---|---|---|
+| `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md` (6.1 Browse menu) | Restored accurate description of menu search + sorting flow to match current implementation. The range left docs missing sorting while HEAD code includes sorting parameters/logic. | `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/java/whz/pti/eva/menu/boundary/PizzaController.java:46-75` (`GET /`, optional `q`, `sort` default `name`, `direction` default `asc`; `PizzaService.searchByName(q)`; in-memory sort by `Pizza::getPriceMedium` when `sort=price` else `Pizza::getName` case-insensitive; `direction=desc` reverses; model adds `pizzas`, `searchQuery`, `sort`, `direction`). `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/src/main/resources/templates/pizza/pizza-menu.html:19-35` (GET form submits `q`, `sort` = Name/Preis Medium, `direction` = Aufsteigend/Absteigend). Range evidence: `git diff 1a276c7..46f0aae -- .../docs/arc42/06-runtime-view.md` removed sorting text; `git show --name-status 0c46876 46f0aae` shows sorting removed then re-added in code/templates without restoring docs in `46f0aae`. |
+
+## Checks performed
+- `git diff --name-status 1a276c7b5cead707a731756e84d58887f434249f..46f0aae5d55460b7407fa13578f89dea9d7ce14e -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`
+- `git log --oneline 1a276c7..46f0aae`
+- Inspected current source files and base/current chapter text (`git show 1a276c7:.../06-runtime-view.md`); searched arc42 for `sort|direction|priceMedium|Sortier` (no other hits).
+- `git diff --check` (unstaged/cached) — clean.
+- `git add` limited to `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/06-runtime-view.md`; reviewed `git diff --cached`.
+- `git push -u origin HEAD` — **succeeded** (branch created/tracked).
+- `gh auth status` (github.com authenticated) and `gh pr create` — **succeeded**.
+
+## Checks not performed
+- No application build or tests run (documentation-only change; not claimed as passing).
+
+## Open questions / assumptions
+- None for this update. Other runtime scenarios/chapters were not affected by the reviewed range based on the inspected diff and current sources.
+- Observation (not acted on): the reviewed commits also touched build artifacts and `local-agent/logs/*`; these are outside PizzaProject arc42 scope and were intentionally not modified.
+
+## Git / PR (succeeded)
+- Branch: `docs/arc42-auto-20261107T015747Z` (created from `main` state at `46f0aae`, one documentation commit)
+- Commit: `39dc755 docs(arc42): restore menu sorting in runtime view`
+- Push: succeeded to `origin` (`SanzharBerdikozhoev/LangeNachtDesCodings`)
+- **Pull request:** https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings/pull/2 (base `main`, not merged)
+[2026-11-07T01:58:59Z] AI agent finished successfully.
+[2026-11-07T01:59:00Z] Guard passed: remote main untouched.
+[2026-11-07T01:59:00Z] Checkpoint updated: 46f0aae5d55460b7407fa13578f89dea9d7ce14e
+[2026-11-07T01:59:00Z] Documentation update run completed.
+
+Script exit code: 0

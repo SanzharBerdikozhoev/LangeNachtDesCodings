@@ -32,6 +32,7 @@
             </select>
             <button class="btn btn-outline-primary" type="submit">Suchen</button>
             <a class="btn btn-outline-secondary" th:href="@{/}">Zurücksetzen</a>
+            <button class="btn btn-warning text-nowrap" id="surprise-pizza" type="button" title="Lass uns für dich entscheiden">🎲 Überrasch mich</button>
         </form>
         <p th:if="${#lists.isEmpty(pizzas)}" class="text-muted">Keine Pizzen gefunden.</p>
         <table class="table table-bordered align-middle">
@@ -118,6 +119,21 @@
             toast.style.opacity = "1";
             setTimeout(() => toast.style.opacity = "0", 5000);
         }
+
+        document.getElementById("surprise-pizza")?.addEventListener("click", () => {
+            const rows = [...document.querySelectorAll("tbody tr")];
+            if (!rows.length) {
+                showToast("Keine Pizza gefunden — ändere deine Suche.", "warning");
+                return;
+            }
+            const row = rows[Math.floor(Math.random() * rows.length)];
+            const quantity = row.querySelector(".qty");
+            quantity.value = Math.max(1, Number(quantity.value) || 0);
+            row.classList.add("table-warning");
+            row.scrollIntoView({ behavior: "smooth", block: "center" });
+            showToast("Heute gibt’s: " + row.cells[1].textContent.trim() + "! Größe und Menge kannst du noch ändern.");
+            setTimeout(() => row.classList.remove("table-warning"), 3000);
+        });
     });
 
     document.addEventListener("input", e => {
