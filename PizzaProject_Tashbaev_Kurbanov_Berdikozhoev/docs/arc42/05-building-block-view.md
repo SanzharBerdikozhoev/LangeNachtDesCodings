@@ -14,7 +14,7 @@ The Spring Boot application starts from `PizzaProjectTashbaevKurbanovBerdikozhoe
 | `customer` | Customer profile and delivery address entities, repositories, services, and controllers. |
 | `user` | User/role entities, registration/login endpoints, current-user details, and user service. |
 | `auth` | Spring Security configuration and successful-login cart merge/redirect handler. |
-| `payment` | Payment service, DTOs, controller, and payment exception advice. Calls the configured external payment API. |
+| `payment` | Payment service, DTOs, controller, `BalanceControllerAdvice`, and payment/account templates. `PaymentController` serves the authenticated account view (`GET /payment/account`, `templates/payment/account.html`) and deposit action (`POST /payment/deposit`); `BalanceControllerAdvice` adds `currentUser` and payment balance to model data for authenticated requests. `PaymentServiceImpl` calls the configured external payment API for account/balance, deposit, and checkout payment operations. |
 | `common` | Shared base entity, database initialization, session utility, and domain exceptions. |
 
 Most features use `boundary` for MVC endpoints, `service` for business logic, and `domain` for entities/repositories. This is a package convention, not a separate runtime service boundary.

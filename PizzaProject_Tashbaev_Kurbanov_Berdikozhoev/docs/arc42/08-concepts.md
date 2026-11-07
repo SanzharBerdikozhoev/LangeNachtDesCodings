@@ -18,7 +18,9 @@ Spring Boot validation is a dependency; form objects and a user creation validat
 
 ## External payment communication
 
-`PaymentServiceImpl` uses Spring `RestClient`, JSON request bodies, and HTTP Basic credentials built from the `service.payment.plainCreds` property. The checked-in properties file contains a credential-like value; its value is intentionally not repeated here. Payment/deposit response errors are translated to `PaymentFailedException` where caught.
+`PaymentServiceImpl` uses Spring `RestClient`, JSON request bodies, and HTTP Basic credentials built from the `service.payment.plainCreds` property. The checked-in properties file contains a credential-like value; its value is intentionally not repeated here. It performs checkout payments (`POST .../payment`), account creation (`POST .../{loginName}`), balance retrieval (`GET .../{loginName}/account`), and deposits (`PATCH .../{loginName}/deposit`) against the configured `service.payment.url`. Payment and deposit response errors are translated to `PaymentFailedException` where caught.
+
+The web layer exposes payment account operations through `PaymentController` (`GET /payment/account`, `POST /payment/deposit`) and `templates/payment/account.html`. `BalanceControllerAdvice` is a `@ControllerAdvice` that adds `currentUser` and balance model attributes for authenticated requests, with a `0.0` fallback when balance retrieval fails.
 
 ## Initialization
 
