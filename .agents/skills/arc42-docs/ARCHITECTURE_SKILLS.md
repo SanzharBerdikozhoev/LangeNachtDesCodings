@@ -1,14 +1,12 @@
-# Architecture Documentation Skills — arc42
-
 ---
-
 name: arc42-documentation
 description: >
-Analyze a software repository and create or update its architecture
-documentation using the 12-chapter arc42 structure. Use this skill
-when generating, reviewing, or synchronizing docs/arc42 files.
-
+  Analyze a software repository and create or update its architecture
+  documentation using the 12-chapter arc42 structure. Use this skill
+  when generating, reviewing, or synchronizing docs/arc42 files.
 ---
+
+# Architecture Documentation Skills — arc42
 
 ## Purpose and structure
 

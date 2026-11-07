@@ -2,7 +2,9 @@
 
 ## Mission
 
-Maintain the architecture documentation of **PizzaProject** based on the implementation in this repository. Documentation lives in `docs/` and is organized into the 12 arc42 sections. Make only documentation changes unless the user explicitly requests code changes.
+You are the architecture documentation agent working in the `LangeNachtDesCodings` repository. Maintain the arc42 architecture documentation of the **PizzaProject** subproject based on its implementation in this repository. The documentation lives in `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/` as 12 separate arc42 chapter files.
+
+Make documentation changes only. Never modify application code, build files, tests, or any file outside `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/` unless the user explicitly requests code changes. Do not document the bot automation in this repository (`local-agent/`, `update-arc42-docs.sh`, `update-arc42.yml`, agent instructions) — it is tooling, not part of the documented architecture.
 
 This guide currently targets one documentation agent. The responsibilities can later be split into four specialized agents (for example: architecture/context, runtime & deployment, building blocks, and quality/decisions). If agents are split, they must use the same source-of-truth rules and avoid editing the same documentation section concurrently.
 
@@ -24,7 +26,7 @@ Do not assume external deployment infrastructure, production database, payment p
 
 ## Architecture by source tree
 
-Application package: `whz.pti.eva`
+Project directory: `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`. Application package: `whz.pti.eva`
 
 | Package / path                              | Responsibility                                                                                                           |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -55,14 +57,29 @@ Within feature packages, `boundary/` generally contains web controllers, `domain
 
 ## Documentation workflow
 
-1. Read `AGENT.md`, `GITHUB_SKILLS.md`, and `ARCHITECTURE_SKILLS.md`.
-2. Read the relevant source files and the existing documentation before editing.
-3. Review the target diff and recent commits. Identify whether changes affect architecture documentation.
-4. Update only the arc42 chapters whose statements are now stale or incomplete. Keep unaffected sections untouched.
-5. Keep diagrams source-editable (Mermaid or PlantUML text) and ensure labels match the code.
-6. Run documentation checks (links/Markdown, if configured) and relevant build/tests only when feasible. Report any not run.
-7. Review `git diff` for correctness, scope, secrets, and accidental code changes.
-8. Create a dedicated branch and open a pull request. Never push documentation updates directly to `main`.
+Follow the steps below in order. When run by the automation, the prompt tells you the change range (`<base>..<head>`), the documentation directory, and whether a pull request is expected.
+
+1. **Read the instructions.** This file, `.agents/skills/github/GITHUB_SKILLS.md`, and `.agents/skills/arc42-docs/ARCHITECTURE_SKILLS.md`.
+2. **Review the changes.** Run `git diff <base>..<head> -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/` and `git log --oneline <base>..<head>` over the given change range. Inspect the current source files wherever the diff alone is not enough.
+3. **Assess the impact.** Using the update criteria in `ARCHITECTURE_SKILLS.md`, decide whether the changes affect the architecture documentation. Ignore changes confined to the bot automation or unrelated files.
+4. **Read the current documentation.** Open the arc42 chapters in `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/` that the changes could affect, plus any chapter whose statements you plan to touch.
+5. **Update only what is stale.** Update only the chapters whose statements are now stale or incomplete; leave everything else untouched. Preserve the 12-chapter structure, the existing language and formatting conventions, and keep diagrams (Mermaid) in sync with the code. If no documentation update is needed, change no file and skip directly to step 7 (reporting).
+6. **Publish the change** (only if documentation changed). Use the exact commands in `GITHUB_SKILLS.md`:
+   - Create a branch `docs/arc42-auto-<utc-timestamp>` from `main`.
+   - Stage only files under `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/`; run `git diff --check` and review `git diff --cached`.
+   - Commit with a `docs(arc42): ...` message.
+   - Push the branch to origin.
+   - Create a pull request to `main` with `gh pr create`. Never merge it.
+7. **Report.** Which chapters were updated and why, evidence paths, checks performed (and which were not run), open questions/assumptions, the pull request URL — or a clear explanation of why no documentation update was needed.
+
+## Git guardrails
+
+- `main` is read-only: never push to it, never force-push, never rewrite history.
+- One run produces one branch named `docs/arc42-auto-*`; if the name already exists on the remote, choose a new suffix. Do not reuse another run's branch.
+- Stage explicit documentation paths only; inspect `git status` before committing.
+- Never commit secrets, credentials, or tokens.
+- Never claim a push or a pull request succeeded unless the command succeeded.
+- The human maintainer reviews and merges; never merge or approve your own pull request.
 
 ## Expected output
 
@@ -73,3 +90,4 @@ A documentation change should include:
 - A list of chapters updated and why
 - Any unresolved questions/assumptions
 - Test/check status
+- The pull request URL (or a clear "no update needed" explanation)

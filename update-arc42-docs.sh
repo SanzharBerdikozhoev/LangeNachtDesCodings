@@ -1,23 +1,27 @@
 
 #!/usr/bin/env bash
 
-# One-shot AI documentation updater.
-# Triggered by GitHub Webhook through FastAPI.
+# One-shot AI documentation updater for the arc42 docs of the PizzaProject
+# subproject in this repository (monorepo: bot + project live together).
+# Triggered by GitHub Webhook through the FastAPI bot (local-agent/main.py),
+# or manually: bash update-arc42-docs.sh
 #
 # Requirements:
-#   git, bash, flock, opencode
-#   gh (optional, for automatic Pull Request creation)
+#   git, bash, and the AI CLI configured via AGENT_CMD (default: opencode)
+#   flock (optional; a portable mkdir+pid fallback lock is used when absent)
+#   gh (optional, used by the agent for automatic pull request creation)
 #
 # Authentication:
-#   Configure GitHub CLI and git credentials beforehand.
+#   Configure GitHub CLI and git credentials on the runner beforehand.
 #
 # The script:
-#   1. Fetches the latest main branch.
-#   2. Compares it with the previous successful run.
-#   3. Runs OpenCode to update arc42 documentation.
-#   4. Checks that only documentation files were changed.
-#   5. Creates a separate branch, commits and pushes changes.
-#   6. Optionally creates a Pull Request.
+#   1. Clones this repository.
+#   2. Determines the change range since the previous successful run.
+#   3. Runs the AI agent with a short prompt. All rules, the workflow and the
+#      git operations (branch, commit, push, PR) are defined in AGENT.md and
+#      the skills inside the repository itself.
+#   4. Guards that the agent did not move the remote main branch.
+#   5. Saves a checkpoint so the next run starts from the current main.
 #
 # It processes exactly one update and then exits.
 
@@ -27,7 +31,7 @@ set -Eeuo pipefail
 # Configuration
 # --------------------------------------------------
 
-REPO_URL="${REPO_URL:-https://github.com/SanzharBerdikozhoev/LangeNachtDesCodings.git}"
+REPO_URL="${REPO_URL:-git@github.com:SanzharBerdikozhoev/LangeNachtDesCodings.git}"
 
 MAIN_BRANCH="${MAIN_BRANCH:-main}"
 
@@ -45,9 +49,7 @@ STATE_FILE="${STATE_FILE:-${STATE_DIR}/last-processed-main}"
 
 LOCK_FILE="${LOCK_FILE:-${STATE_DIR}/agent.lock}"
 
-GIT_AUTHOR_NAME="${GIT_AUTHOR_NAME:-Arc42 Documentation Bot}"
-
-GIT_AUTHOR_EMAIL="${GIT_AUTHOR_EMAIL:-arc42-doc-agent@users.noreply.github.com}"
+LOCK_DIR="${LOCK_DIR:-${STATE_DIR}/agent.lock.d}"
 
 # --------------------------------------------------
 # Initialization
@@ -57,7 +59,7 @@ mkdir -p "$WORKDIR_ROOT"
 mkdir -p "$STATE_DIR"
 
 log() {
-    printf '[%s] %s\n' "$(date -Is)" "$*" >&2
+    printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >&2
 }
 
 fail() {
@@ -65,19 +67,14 @@ fail() {
     exit 1
 }
 
-# Prevent simultaneous executions.
-exec 9>"$LOCK_FILE"
-
-if ! flock -n 9; then
-    log "Another documentation update is already running."
-    exit 0
-fi
-
 RUN_DIR=""
 
 cleanup() {
     if [[ -n "${RUN_DIR:-}" && -d "${RUN_DIR:-}" ]]; then
         rm -rf -- "$RUN_DIR"
+    fi
+    if [[ -d "${LOCK_DIR:-}" ]]; then
+        rm -rf -- "$LOCK_DIR"
     fi
 }
 
@@ -87,12 +84,12 @@ trap cleanup EXIT
 # Dependency checks
 # --------------------------------------------------
 
-for cmd in git bash flock mktemp; do
+for cmd in git bash mktemp; do
     command -v "$cmd" >/dev/null 2>&1 ||
         fail "Required command not found: $cmd"
 done
 
-# Check OpenCode command.
+# Check AI CLI command.
 read -r -a AGENT_CMD_ARGS <<< "$AGENT_CMD"
 
 [[ ${#AGENT_CMD_ARGS[@]} -gt 0 ]] ||
@@ -107,6 +104,42 @@ case "$DOCS_PATH" in
         fail "DOCS_PATH must be a safe relative path."
         ;;
 esac
+
+# --------------------------------------------------
+# Lock
+# --------------------------------------------------
+
+acquire_lock() {
+    if command -v flock >/dev/null 2>&1; then
+        exec 9>"$LOCK_FILE"
+        if ! flock -n 9; then
+            log "Another documentation update is already running."
+            exit 0
+        fi
+        return
+    fi
+
+    # Fallback for systems without flock (e.g. macOS): atomic mkdir + pid check.
+    if [[ -d "$LOCK_DIR" ]]; then
+        local old_pid
+        old_pid="$(cat "${LOCK_DIR}/pid" 2>/dev/null || true)"
+        if [[ -n "$old_pid" ]] && kill -0 "$old_pid" 2>/dev/null; then
+            log "Another documentation update is already running (pid ${old_pid})."
+            exit 0
+        fi
+        log "Removing stale lock (pid ${old_pid:-unknown} is not running)."
+        rm -rf -- "$LOCK_DIR"
+    fi
+
+    if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+        log "Another documentation update is already running."
+        exit 0
+    fi
+
+    printf '%s\n' "$$" > "${LOCK_DIR}/pid"
+}
+
+acquire_lock
 
 log "Documentation updater started."
 log "Repository: $REPO_URL"
@@ -157,8 +190,8 @@ fi
 CHANGE_BASE=""
 
 if [[ -n "$LAST_SHA" ]] &&
-   git -C "$REPO_DIR" cat-file -e "${LAST_SHA}^{commit}" 2>/dev/null &&
-   git -C "$REPO_DIR" merge-base --is-ancestor "$LAST_SHA" "$CURRENT_SHA"; then
+    git -C "$REPO_DIR" cat-file -e "${LAST_SHA}^{commit}" 2>/dev/null &&
+    git -C "$REPO_DIR" merge-base --is-ancestor "$LAST_SHA" "$CURRENT_SHA"; then
 
 
     CHANGE_BASE="$LAST_SHA"
@@ -179,87 +212,51 @@ log "Change base: $CHANGE_BASE"
 # Prepare agent prompt
 # --------------------------------------------------
 
+if [[ "$PR_CREATE" == "true" ]]; then
+    PR_STEP="If documentation changed and gh is authenticated: create a pull request to ${MAIN_BRANCH} with gh pr create. Never merge it."
+else
+    PR_STEP="Do not create a pull request in this run."
+fi
+
 PROMPT="$(cat <<EOF
-You are an architecture documentation agent working on this repository.
+Fresh clone of this repository, checked out on the latest ${MAIN_BRANCH}.
+You are the architecture documentation agent for it.
 
-Your task is to maintain the arc42 architecture documentation.
+First read AGENT.md and the skills under .agents/skills/ - they define the
+rules, the evidence requirements and the exact workflow to follow.
 
-IMPORTANT SCOPE:
+Scope: documentation only, for the PizzaProject subproject.
+Target directory: ${DOCS_PATH} (arc42).
+Do not document the bot automation (local-agent/, *.sh, *.yml) or the agent
+instructions (AGENT.md, .agents/) - they are tooling, not architecture.
+Change range to review: ${CHANGE_BASE}..${CURRENT_SHA}
+${CHANGE_NOTE}
 
-- Work ONLY on the PizzaProject subproject.
-- Do not document sibling projects.
-- Target documentation directory: ${DOCS_PATH}
-- Do not modify application code, build files, tests, or unrelated files.
+Follow the workflow in AGENT.md step by step:
+1. Review the changes: git diff and git log over the change range.
+2. Assess whether the changes affect the PizzaProject architecture documentation.
+3. Read the current arc42 chapters in ${DOCS_PATH}.
+4. Update only stale or incomplete chapters. If no update is needed,
+   change no file and stop after reporting why.
+5. If documentation changed: create a branch, commit only files under
+   ${DOCS_PATH}, and push the branch to origin.
+6. ${PR_STEP}
+7. Report: updated chapters and why, evidence paths, checks performed,
+   open questions, and the PR URL if a pull request was created.
 
-INSTRUCTIONS:
-
-1. Read these instruction files if they exist:
-   - AGENT.md
-   - GITHUB_SKILLS.md
-   - ARCHITECTURE_SKILLS.md
-
-2. Inspect the Git history and changes.
-
-   Main branch before changes:
-   ${CHANGE_BASE}
-
-   Current main commit:
-   ${CURRENT_SHA}
-
-   Change note:
-   ${CHANGE_NOTE}
-
-   Use git log and git diff to inspect the relevant changes.
-   Inspect current source files when necessary.
-
-3. Determine whether the changes affect architecture documentation.
-
-4. If documentation needs updating:
-   - Update only affected arc42 chapters.
-   - Preserve the existing 12-chapter structure.
-   - Follow the existing language and formatting conventions.
-   - Do not invent architecture, design decisions, integrations,
-     deployment details, quality goals, or tests.
-   - Base every statement on actual repository evidence.
-   - Keep documentation consistent with the current implementation.
-
-5. If no documentation update is necessary:
-   - Do not modify any files.
-   - Explain why no update is needed.
-
-6. IMPORTANT GIT RULES:
-
-   - Do NOT create commits.
-   - Do NOT create branches.
-   - Do NOT push anything.
-   - Do NOT create Pull Requests.
-   - Do NOT modify files outside ${DOCS_PATH}.
-
-   The surrounding automation script handles Git operations.
-
-7. Before finishing:
-   - Inspect git status.
-   - Review all modifications.
-   - Check that only intended documentation files changed.
-   - Do not include secrets or credentials.
-
-8. Final response must report:
-   - Whether documentation was updated.
-   - Which arc42 chapters were changed.
-   - Evidence paths used.
-   - Checks performed.
-   - Remaining uncertainties.
-   - Why no update was necessary, if applicable.
-
-Do not claim that you committed, pushed, or created a Pull Request.
+Hard rules:
+- Never push to ${MAIN_BRANCH} and never force-push.
+- Never modify files outside ${DOCS_PATH}.
+- Base every statement on repository evidence; never invent architecture.
+- Do not claim a push or a pull request succeeded unless the command did.
 EOF
 )"
 
 # --------------------------------------------------
-# Run OpenCode
+# Run AI agent
 # --------------------------------------------------
 
-log "Starting OpenCode..."
+log "Starting AI agent..."
 
 set +e
 
@@ -273,170 +270,25 @@ AGENT_STATUS=$?
 set -e
 
 if [[ "$AGENT_STATUS" -ne 0 ]]; then
-    fail "OpenCode failed with exit code $AGENT_STATUS. Checkpoint not updated."
+    fail "AI agent failed with exit code $AGENT_STATUS. Checkpoint not updated."
 fi
 
-log "OpenCode finished successfully."
+log "AI agent finished successfully."
 
 # --------------------------------------------------
-# Validate agent modifications
+# Guard: the agent must not have moved the remote main branch
 # --------------------------------------------------
 
-ACTUAL_SHA="$(git -C "$REPO_DIR" rev-parse HEAD)"
+git -C "$REPO_DIR" fetch --quiet origin "$MAIN_BRANCH" ||
+    fail "Could not fetch ${MAIN_BRANCH} after the agent run."
 
-if [[ "$ACTUAL_SHA" != "$CURRENT_SHA" ]]; then
-    fail "Agent modified Git history. Automatic processing stopped."
+ORIGIN_MAIN_SHA="$(git -C "$REPO_DIR" rev-parse "origin/${MAIN_BRANCH}")"
+
+if [[ "$ORIGIN_MAIN_SHA" != "$CURRENT_SHA" ]]; then
+    fail "Remote ${MAIN_BRANCH} moved during the agent run (${CURRENT_SHA} -> ${ORIGIN_MAIN_SHA}). Automatic processing stopped. Checkpoint not updated."
 fi
 
-CHANGED_FILES=()
-
-while IFS= read -r line; do
-
-    [[ -z "$line" ]] && continue
-
-    FILE="${line:3}"
-
-    case "$FILE" in
-        "$DOCS_PATH"|"$DOCS_PATH"/*)
-            CHANGED_FILES+=("$FILE")
-            ;;
-        *)
-            fail "Unexpected file modification outside documentation: $FILE"
-            ;;
-    esac
-
-done < <(git -C "$REPO_DIR" status --porcelain --untracked-files=all)
-
-# --------------------------------------------------
-# No documentation changes
-# --------------------------------------------------
-
-if [[ ${#CHANGED_FILES[@]} -eq 0 ]]; then
-
-    log "OpenCode found no documentation changes."
-
-
-    printf '%s\n' "$CURRENT_SHA" > "${STATE_FILE}.tmp"
-    mv "${STATE_FILE}.tmp" "$STATE_FILE"
-
-    log "Checkpoint updated: $CURRENT_SHA"
-
-    exit 0
-fi
-
-log "Documentation files changed:"
-
-for file in "${CHANGED_FILES[@]}"; do
-    log "  $file"
-done
-
-# --------------------------------------------------
-# Create documentation branch
-# --------------------------------------------------
-
-BRANCH="docs/arc42-auto-$(date -u +%Y%m%dT%H%M%SZ)"
-
-git -C "$REPO_DIR" switch --quiet -c "$BRANCH" ||
-    fail "Could not create documentation branch."
-
-# --------------------------------------------------
-# Stage only arc42 documentation
-# --------------------------------------------------
-
-git -C "$REPO_DIR" add -- "$DOCS_PATH" ||
-    fail "Could not stage documentation."
-
-if git -C "$REPO_DIR" diff --cached --quiet; then
-
-    log "No tracked documentation changes to commit."
-
-    printf '%s\n' "$CURRENT_SHA" > "${STATE_FILE}.tmp"
-    mv "${STATE_FILE}.tmp" "$STATE_FILE"
-
-    exit 0
-fi
-
-git -C "$REPO_DIR" diff --cached --check ||
-    fail "Whitespace or patch errors detected."
-
-# Verify staged files.
-while IFS= read -r file; do
-
-    case "$file" in
-        "$DOCS_PATH"|"$DOCS_PATH"/*)
-            ;;
-        *)
-            fail "Unexpected staged file: $file"
-            ;;
-    esac
-
-done < <(git -C "$REPO_DIR" diff --cached --name-only)
-
-# --------------------------------------------------
-# Commit
-# --------------------------------------------------
-
-git -C "$REPO_DIR" \
-    -c user.name="$GIT_AUTHOR_NAME" \
-    -c user.email="$GIT_AUTHOR_EMAIL" \
-    commit -m "docs(arc42): update architecture documentation" ||
-    fail "Could not create documentation commit."
-
-log "Documentation committed."
-
-# --------------------------------------------------
-# Push branch
-# --------------------------------------------------
-
-log "Pushing branch: $BRANCH"
-
-git -C "$REPO_DIR" push --set-upstream origin "$BRANCH" ||
-    fail "Push failed. Checkpoint not updated."
-
-log "Branch pushed successfully."
-
-# --------------------------------------------------
-# Create Pull Request
-# --------------------------------------------------
-
-if [[ "$PR_CREATE" == "true" ]]; then
-
-    if command -v gh >/dev/null 2>&1 &&
-       gh auth status >/dev/null 2>&1; then
-
-        log "Creating Pull Request..."
-
-        if PR_URL="$(
-            gh pr create \
-                --repo "$REPO_URL" \
-                --base "$MAIN_BRANCH" \
-                --head "$BRANCH" \
-                --title "docs(arc42): update architecture documentation" \
-                --body "Automated arc42 documentation update.
-
-Main commit reviewed: ${CURRENT_SHA}
-
-Updated directory: ${DOCS_PATH}
-
-Please review the documentation changes before merging."
-        )"; then
-
-            log "Pull Request created: $PR_URL"
-
-        else
-
-            log "WARNING: Branch was pushed, but Pull Request creation failed."
-
-        fi
-
-    else
-
-        log "WARNING: GitHub CLI unavailable or not authenticated."
-        log "Branch was pushed, but no Pull Request was created."
-
-    fi
-
-fi
+log "Guard passed: remote ${MAIN_BRANCH} untouched."
 
 # --------------------------------------------------
 # Save successful checkpoint
@@ -447,4 +299,4 @@ mv "${STATE_FILE}.tmp" "$STATE_FILE"
 
 log "Checkpoint updated: $CURRENT_SHA"
 
-log "Documentation update completed successfully."
+log "Documentation update run completed."

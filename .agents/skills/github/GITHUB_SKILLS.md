@@ -19,7 +19,7 @@ Useful commands:
 ```bash
 git status --short --branch
 git ls-files
-git ls-files 'PizzaProject*/**'  # adapt to actual repository layout
+git ls-files 'PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/**'
 find . -maxdepth 3 -type f -not -path './.git/*' | sort
 ```
 
@@ -30,7 +30,7 @@ sed -n '1,240p' path/to/file
 cat path/to/file
 ```
 
-For this project, inspect `build.gradle`, `settings.gradle`, `src/main/java/`, `src/main/resources/`, and `src/test/` from the PizzaProject directory. Exclude unrelated projects such as GradesCalculator and MVP from documentation work.
+Inspect `build.gradle`, `settings.gradle`, `src/main/java/`, `src/main/resources/`, and `src/test/` inside `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/`. Do not document the bot automation files (`local-agent/`, `update-arc42-docs.sh`, `update-arc42.yml`) or the agent instructions (`AGENT.md`, `.agents/`).
 
 ## 2. Inspect change history
 
@@ -40,7 +40,7 @@ git log --oneline -- path/to/relevant/file
 git show --stat --oneline <commit>
 git show --format=fuller --find-renames <commit>
 git diff --stat <base>..<head>
-git diff --find-renames <base>..<head> -- PizzaProject/
+git diff --find-renames <base>..<head> -- PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/
 git diff --name-status <base>..<head>
 ```
 
@@ -54,10 +54,10 @@ Update local `main` and branch from it:
 git fetch origin
 git switch main
 git pull --ff-only origin main
-git switch -c docs/arc42-update-YYYYMMDD-<short-topic>
+git switch -c docs/arc42-auto-YYYYMMDDTHHMMSSZ
 ```
 
-Use a branch name that is descriptive, date-stamped, and safe for a single run. If the branch already exists, choose a new suffix; do not reuse another run's branch.
+In automated runs use the `docs/arc42-auto-<utc-timestamp>` pattern; for manual runs a descriptive, date-stamped name is fine. Use a branch name that is safe for a single run. If the branch already exists, choose a new suffix; do not reuse another run's branch.
 
 ## 4. Stage, commit, and push
 
@@ -72,7 +72,7 @@ git commit -m "docs(arc42): update <chapter>"
 git push -u origin HEAD
 ```
 
-Only commit documentation files and any explicitly requested agent instructions. Never commit runtime state, temporary clone files, credentials, generated build output, or unrelated changes.
+Only commit documentation files under `PizzaProject_Tashbaev_Kurbanov_Berdikozhoev/docs/arc42/`. Never commit runtime state, temporary clone files, credentials, generated build output, or unrelated changes.
 
 ## 5. Create a pull request
 
@@ -83,7 +83,7 @@ gh auth status
 gh pr create \
   --base main \
   --head "$(git branch --show-current)" \
-  --title "docs(arc42): update PizzaProject architecture" \
+  --title "docs(arc42): update PizzaProject architecture documentation" \
   --body-file /tmp/pr-body.md
 ```
 
