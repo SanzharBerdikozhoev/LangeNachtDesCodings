@@ -24,6 +24,4 @@ The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDepo
 
 ## 6.5 Startup initialization
 
-## 6.4 Startup initialization
-
 `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
