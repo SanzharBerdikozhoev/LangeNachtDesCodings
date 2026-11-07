@@ -22,6 +22,12 @@ The account view posts to `/payment/deposit` (`POST`). `PaymentController.doDepo
 
 `PaymentServiceImpl` retrieves balances via HTTP GET to the configured payment API account endpoint and performs deposits via HTTP PATCH to the deposit endpoint, both with HTTP Basic credentials derived from configuration. `BalanceControllerAdvice` also adds `currentUser` and balance to model attributes for authenticated requests, using `0.0` as a fallback when balance retrieval fails.
 
-## 6.5 Startup initialization
+## 6.5 Favorite pizzas
+
+Authenticated `USER` visitors can save favorite pizzas from the menu and manage them on `/favorites`. `templates/pizza/pizza-menu.html` posts to `/favorites/{pizzaId}` (add) and links to `/favorites` ("Meine Favoriten"); the favorite button is disabled when the current user is not a `USER`.
+
+`FavoritePizzaController` (`/favorites`) resolves the current user via `CurrentUserUtils`. `GET /favorites` lists favorites from `FavoritePizzaService.getFavorites(userId)` and renders `templates/favorite/list.html`; if no user is present it redirects to `/login?redirect=/favorites` with a flash error. `POST /favorites/{pizzaId}` adds a favorite (service checks for an existing user/pizza pair, loads the pizza via `PizzaRepository`, and saves a `FavoritePizza`) then redirects to `/favorites` with a success message; unauthenticated access redirects to login. `POST /favorites/{pizzaId}/remove` removes the favorite for the current user when present and redirects to `/favorites`. `auth/SecurityConfig` requires `USER` authority for `/favorites/**`.
+
+## 6.6 Startup initialization
 
 `InitializeDB` creates preset users/customer/address data at `@PostConstruct` when users are absent. `menu/utils/DataInitializer` seeds sample pizzas through `CommandLineRunner` when the pizza repository is empty.
